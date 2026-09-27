@@ -26,6 +26,7 @@ from pupil_tracking.registration.streams.custom_feature import CustomFeatureStre
 from pupil_tracking.utils.config import get_config
 from pupil_tracking.utils.types import (
     EyeDetectionResult,
+    RegistrationQuality,
     RegistrationResult,
     StreamResult,
 )
@@ -49,6 +50,7 @@ class RegistrationEngine:
 
     def __init__(self):
         cfg = get_config().registration
+        self.enabled = getattr(cfg, "enabled", True)
         self.streams: Dict[str, BaseStream] = {}
         self.fusion = FusionEngine()
 
@@ -73,8 +75,8 @@ class RegistrationEngine:
                 logger.info("Custom feature stream skipped — no model available")
 
         logger.info(
-            "RegistrationEngine initialised with %d streams: %s",
-            len(self.streams), list(self.streams.keys()),
+            "RegistrationEngine initialised with %d streams (enabled=%s): %s",
+            len(self.streams), self.enabled, list(self.streams.keys()),
         )
 
     def register(
@@ -84,25 +86,17 @@ class RegistrationEngine:
         detection_ref: EyeDetectionResult,
         detection_curr: EyeDetectionResult,
     ) -> RegistrationResult:
-        """Run all streams and fuse results.
-
-        Parameters
-        ----------
-        img_ref : np.ndarray
-            Reference (pre-operative) eye image.
-        img_curr : np.ndarray
-            Current (intra-operative) eye image.
-        detection_ref : EyeDetectionResult
-            Detection result for the reference image.
-        detection_curr : EyeDetectionResult
-            Detection result for the current image.
-
-        Returns
-        -------
-        RegistrationResult
-            Fused cyclotorsion result with per-stream breakdown.
-        """
+        """Run all streams and fuse results."""
         start = time.perf_counter()
+
+        # Check if master registration is disabled (centration-only mode)
+        if not self.enabled:
+            logger.debug("Registration component disabled — running centration only")
+            return RegistrationResult(
+                total_processing_time_ms=(time.perf_counter() - start) * 1000.0,
+                quality=RegistrationQuality.NO_RESULT,
+                metadata={"disabled": True, "mode": "centration_only"},
+            )
 
         # Validate inputs
         if not detection_ref.has_both:
@@ -166,3 +160,73 @@ class RegistrationEngine:
             self.streams[name].enabled = False
             return True
         return False
+
+    def set_master_enabled(self, enabled: bool) -> None:
+        """Enable or disable the entire registration component.
+
+        When disabled, the system runs purely in centration mode without
+        computing cyclotorsion or running registration streams.
+        """
+        self.enabled = bool(enabled)
+        logger.info("Registration master enabled set to: %s", self.enabled)
+
+    def set_ink_tracker_enabled(self, enabled: bool) -> None:
+        """Enable or disable Stream C (purple limbal ink tracker)."""
+        if enabled:
+            self.enable_stream("ink_markers")
+        else:
+            self.disable_stream("ink_markers")
+        logger.info("Ink marker stream enabled set to: %s", enabled)
+
+    def set_iris_features_enabled(self, enabled: bool) -> None:
+        """Enable or disable iris landmark / feature extraction streams."""
+        if enabled:
+            self.enable_stream("custom_feature")
+            self.enable_stream("deep_matcher")
+        else:
+            self.disable_stream("custom_feature")
+            self.disable_stream("deep_matcher")
+        logger.info("Iris feature streams enabled set to: %s", enabled)
+
+    def set_phase_correlation_enabled(self, enabled: bool) -> None:
+        """Enable or disable polar FFT phase correlation stream."""
+        if enabled:
+            self.enable_stream("phase_correlation")
+        else:
+            self.disable_stream("phase_correlation")
+        logger.info("Phase correlation stream enabled set to: %s", enabled)
+
+    def register_pentacam(
+        self,
+        img_pentacam: np.ndarray,
+        img_elita: np.ndarray,
+        pentacam_result: Optional[Any] = None,
+        elita_detection: Optional[EyeDetectionResult] = None,
+        laterality: str = "OD",
+        mode: str = "static",
+    ):
+        """Cross-modality registration between seated Pentacam IR and supine ELITA image."""
+        if not self.enabled:
+            logger.info("Registration disabled — skipping cross-modality registration (centration only mode)")
+            from pupil_tracking.pentacam.cross_system import CrossSystemRegistrationResult, RegistrationFailureKind
+            return CrossSystemRegistrationResult(
+                valid=False,
+                failure=RegistrationFailureKind.UNKNOWN_ERROR,
+                failure_reason="Registration component is turned OFF in Settings (Centration Only Mode).",
+                clinical_impact="DISABLED",
+                quality_assessment="Bypassed (Centration Only Mode)",
+                torsion_direction="NEUTRAL",
+                laterality=laterality,
+            )
+
+        from pupil_tracking.pentacam.cross_registration import CrossModalityRegistrationEngine
+        engine = CrossModalityRegistrationEngine()
+        return engine.register(
+            pentacam_image=img_pentacam,
+            elita_image=img_elita,
+            pentacam_result=pentacam_result,
+            elita_detection=elita_detection,
+            laterality=laterality,
+            mode=mode,
+        )
+
