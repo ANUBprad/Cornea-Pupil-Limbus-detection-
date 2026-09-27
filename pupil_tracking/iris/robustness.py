@@ -518,7 +518,11 @@ def quality_stability_correlation(
     conf = np.asarray([float(f.confidence) for f in base_feats], dtype=float)
     retained = np.asarray([1.0 if i in matched else 0.0 for i in range(n_base)], dtype=float)
 
-    from scipy.stats import spearmanr  # type: ignore
+    try:
+        from scipy.stats import spearmanr  # type: ignore
+        have_scipy = True
+    except ImportError:
+        have_scipy = False
 
     # When all (or none) features are retained, or all confidences are equal,
     # the rank correlation is undefined; report 0.0 with defined=False rather
@@ -526,8 +530,20 @@ def quality_stability_correlation(
     defined = bool(np.unique(conf).size > 1 and np.unique(retained).size > 1)
     if not defined:
         rho = 0.0
-    else:
+    elif have_scipy:
         rho = float(spearmanr(conf, retained).correlation)
+    else:
+        # Pure numpy Spearman rank correlation
+        def _rank(x):
+            inv = np.empty(x.size, dtype=int)
+            inv[np.argsort(x)] = np.arange(x.size)
+            return inv.astype(float)
+        rx = _rank(conf)
+        ry = _rank(retained)
+        vx = rx - rx.mean()
+        vy = ry - ry.mean()
+        denom = np.sqrt(np.sum(vx**2) * np.sum(vy**2))
+        rho = float(np.sum(vx * vy) / denom) if denom > 1e-12 else 0.0
 
     # Per-quantile retention.
     order = np.argsort(conf, kind="stable")

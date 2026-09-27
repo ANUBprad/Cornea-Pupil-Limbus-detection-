@@ -872,6 +872,9 @@ class RegistrationResult:
     # Timing
     total_processing_time_ms: float = 0.0
 
+    # Diagnostic metadata
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             "valid": self.valid,
@@ -886,6 +889,7 @@ class RegistrationResult:
                 _sf(self.confidence_interval_deg[1]),
             ),
             "total_processing_time_ms": _sf(self.total_processing_time_ms),
+            "metadata": dict(self.metadata),
             "stream_results": {
                 k: v.to_dict() for k, v in self.stream_results.items()
             },

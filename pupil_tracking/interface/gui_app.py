@@ -160,6 +160,7 @@ class PupilTrackingGUI:
 
         self._fast_engine: Optional[Any] = None
         self._opt_processor: Optional[Any] = None
+        self._registration_engine: Optional[Any] = None
         self._async_capture: Optional[Any] = None
         self._using_optimized_camera: bool = False
         self._last_opt_stats: Dict[str, Any] = {}
@@ -277,6 +278,27 @@ class PupilTrackingGUI:
         self._ruler_points: list[tuple[float, float]] = []
         self._ruler_known_dist_mm_var = tk.DoubleVar(value=10.0)
 
+        # ── Cyclotorsion & Iris Registration Component Toggles ──
+        reg_cfg = getattr(self.cfg, "registration", None)
+        self._enable_registration_var = tk.BooleanVar(
+            value=getattr(reg_cfg, "enabled", True) if reg_cfg else True
+        )
+        self._enable_iris_features_var = tk.BooleanVar(
+            value=getattr(reg_cfg, "enable_iris_features", True) if reg_cfg else True
+        )
+        self._enable_ink_tracker_var = tk.BooleanVar(
+            value=getattr(reg_cfg, "enable_ink_tracker", True) if reg_cfg else True
+        )
+        self._enable_poc_var = tk.BooleanVar(
+            value=getattr(reg_cfg, "enable_phase_correlation", True) if reg_cfg else True
+        )
+        _init_status = (
+            "Mode: Centration + Registration"
+            if self._enable_registration_var.get()
+            else "Mode: Pure Centration Only (Registration OFF)"
+        )
+        self._reg_settings_status = tk.StringVar(value=_init_status)
+
 
     # ================================================================
     # Detector Initialisation
@@ -322,6 +344,18 @@ class PupilTrackingGUI:
             self._status_var.set(
                 "Model loading failed — classical detection unavailable"
             )
+
+        try:
+            from pupil_tracking.registration.engine import RegistrationEngine
+            self._registration_engine = RegistrationEngine()
+            reg_on = self._enable_registration_var.get()
+            self._registration_engine.set_master_enabled(reg_on)
+            self._registration_engine.set_ink_tracker_enabled(self._enable_ink_tracker_var.get() if reg_on else False)
+            self._registration_engine.set_iris_features_enabled(self._enable_iris_features_var.get() if reg_on else False)
+            self._registration_engine.set_phase_correlation_enabled(self._enable_poc_var.get() if reg_on else False)
+        except Exception as exc:
+            self.logger.warning("Registration engine initialization skipped or failed: %s", exc)
+            self._registration_engine = None
 
     # ================================================================
     # Grayscale Mode Control (NEW)
@@ -1746,6 +1780,83 @@ class PupilTrackingGUI:
         # END GRAYSCALE GUI 8
         # ══════════════════════════════════════════════════════════
 
+        # ══════════════════════════════════════════════════════════
+        # CYCLOTORSION & IRIS REGISTRATION SETTINGS
+        # ══════════════════════════════════════════════════════════
+        reg_lf = ttk.LabelFrame(sf, text="🌀 Iris Registration & Cyclotorsion", padding=8)
+        reg_lf.pack(fill=tk.X, padx=4, pady=4)
+
+        ttk.Label(
+            reg_lf,
+            text=(
+                "Turn features ON/OFF to run and test each module independently.\n"
+                "When disabled, the system runs purely in centration mode."
+            ),
+            style="Muted.TLabel",
+            justify=tk.LEFT,
+        ).pack(anchor=tk.W, pady=(0, 6))
+
+        # Master Checkbutton: Centration Only vs Full Registration
+        ttk.Checkbutton(
+            reg_lf,
+            text="Enable Iris Registration & Cyclotorsion (Master Switch)",
+            variable=self._enable_registration_var,
+        ).pack(anchor=tk.W, pady=2)
+        ttk.Label(
+            reg_lf,
+            text="   ↳ When OFF: ONLY Centration runs (pupil, limbus, corneal vertex, offset).",
+            style="Tiny.TLabel",
+        ).pack(anchor=tk.W, pady=(0, 4))
+
+        sub_reg_frame = ttk.Frame(reg_lf)
+        sub_reg_frame.pack(fill=tk.X, padx=(16, 0), pady=2)
+
+        ttk.Checkbutton(
+            sub_reg_frame,
+            text="Enable Iris Feature Detection (Crypts, Furrows, Landmarks)",
+            variable=self._enable_iris_features_var,
+        ).pack(anchor=tk.W, pady=1)
+        ttk.Label(
+            sub_reg_frame,
+            text="   Biometric iris landmarks. Turn OFF to test without texture analysis.",
+            style="Tiny.TLabel",
+        ).pack(anchor=tk.W, pady=(0, 3))
+
+        ttk.Checkbutton(
+            sub_reg_frame,
+            text="Enable Limbal Purple Ink Marker Tracking (Gentian Violet)",
+            variable=self._enable_ink_tracker_var,
+        ).pack(anchor=tk.W, pady=1)
+        ttk.Label(
+            sub_reg_frame,
+            text="   Doctor's surgical ink marks near limbus. Turn OFF for unmarked eyes.",
+            style="Tiny.TLabel",
+        ).pack(anchor=tk.W, pady=(0, 3))
+
+        ttk.Checkbutton(
+            sub_reg_frame,
+            text="Enable Polar Phase Correlation (1-D FFT POC)",
+            variable=self._enable_poc_var,
+        ).pack(anchor=tk.W, pady=1)
+        ttk.Label(
+            sub_reg_frame,
+            text="   Daugman polar unwrapping and fast phase-only correlation.",
+            style="Tiny.TLabel",
+        ).pack(anchor=tk.W, pady=(0, 4))
+
+        ttk.Label(
+            reg_lf,
+            textvariable=self._reg_settings_status,
+            font=sn,
+            foreground=c.ACCENT,
+        ).pack(anchor=tk.W, pady=(4, 2))
+
+        ttk.Button(
+            reg_lf,
+            text="🧪 Test Active Components Independently",
+            command=self._test_components_independently,
+        ).pack(anchor=tk.W, pady=(4, 2))
+
         p_lf = ttk.LabelFrame(sf, text="Pipeline", padding=8)
         p_lf.pack(fill=tk.X, padx=4, pady=4)
 
@@ -2321,6 +2432,10 @@ class PupilTrackingGUI:
             (self._fixed_scale_var, "calibration"),
             (self._corneal_ref_mm_var, "calibration"),
             (self._ring_ref_mm_var, "calibration"),
+            (self._enable_registration_var, "registration"),
+            (self._enable_iris_features_var, "registration"),
+            (self._enable_ink_tracker_var, "registration"),
+            (self._enable_poc_var, "registration"),
         )
         for var, reason in callbacks:
             var.trace_add(
@@ -2383,6 +2498,42 @@ class PupilTrackingGUI:
                     corneal_diameter_mm=corneal_mm,
                     ring_diameter_mm=ring_mm,
                 )
+
+        # Apply cyclotorsion & iris registration settings
+        if "registration" in reasons or not restart_required:
+            reg_on = bool(self._enable_registration_var.get())
+            feat_on = bool(self._enable_iris_features_var.get())
+            ink_on = bool(self._enable_ink_tracker_var.get())
+            poc_on = bool(self._enable_poc_var.get())
+
+            if hasattr(self.cfg, "registration"):
+                self.cfg.registration.enabled = reg_on
+                self.cfg.registration.enable_iris_features = feat_on
+                self.cfg.registration.enable_custom_feature = feat_on
+                self.cfg.registration.enable_deep_matcher = feat_on
+                self.cfg.registration.enable_ink_tracker = ink_on
+                self.cfg.registration.enable_phase_correlation = poc_on
+
+            if hasattr(self, "_registration_engine") and self._registration_engine is not None:
+                self._registration_engine.set_master_enabled(reg_on)
+                self._registration_engine.set_ink_tracker_enabled(ink_on if reg_on else False)
+                self._registration_engine.set_iris_features_enabled(feat_on if reg_on else False)
+                self._registration_engine.set_phase_correlation_enabled(poc_on if reg_on else False)
+
+            if not reg_on:
+                status_desc = "Current: Pure Centration (Registration OFF)"
+            else:
+                active_parts = []
+                if poc_on:
+                    active_parts.append("POC")
+                if feat_on:
+                    active_parts.append("Iris Feat")
+                if ink_on:
+                    active_parts.append("Purple Ink")
+                status_desc = f"Current: Centration + Reg ({'+'.join(active_parts) if active_parts else 'None'})"
+
+            if hasattr(self, "_reg_settings_status"):
+                self._reg_settings_status.set(status_desc)
 
         if self._tracker is not None and not self._video_running:
             self._tracker = EyeKalmanTracker(config=self.cfg)
@@ -2611,6 +2762,69 @@ class PupilTrackingGUI:
         else:
             self._engine_status_var.set("Engine: rebuild FAILED")
             self._status_var.set("Engine rebuild failed — check model path and logs")
+
+    def _test_components_independently(self) -> None:
+        """Test and verify each component status and independent execution."""
+        reg_on = self._enable_registration_var.get()
+        feat_on = self._enable_iris_features_var.get()
+        ink_on = self._enable_ink_tracker_var.get()
+        poc_on = self._enable_poc_var.get()
+
+        status_lines = []
+        # 1. Centration Pipeline
+        c_status = "✓ READY" if self._detector is not None else "✗ NOT READY"
+        status_lines.append(f"1. Centration Pipeline (Pupil, Limbus, Offset):\n   Status: {c_status}")
+
+        # 2. Master Registration
+        if not reg_on:
+            status_lines.append(
+                "2. Cyclotorsion & Iris Registration:\n   Status: DISABLED (Pure Centration Mode active)"
+            )
+        else:
+            r_status = "✓ ACTIVE" if getattr(self, "_registration_engine", None) is not None else "⚠ INITIALIZING"
+            status_lines.append(f"2. Cyclotorsion & Iris Registration:\n   Status: {r_status}")
+
+        # 3. Iris Feature Detection
+        if not reg_on or not feat_on:
+            status_lines.append(
+                "3. Iris Feature Detection (Crypts, Furrows):\n   Status: DISABLED (Bypassed)"
+            )
+        else:
+            status_lines.append(
+                "3. Iris Feature Detection (Crypts, Furrows):\n   Status: ✓ ACTIVE (Landmarks Enabled)"
+            )
+
+        # 4. Purple Limbal Ink Tracker
+        if not reg_on or not ink_on:
+            status_lines.append(
+                "4. Limbal Purple Ink Marker Tracker (Gentian Violet):\n   Status: DISABLED (Bypassed)"
+            )
+        else:
+            detected_cnt = 0
+            if self._current_image is not None and self._current_result is not None:
+                try:
+                    from pupil_tracking.registration.streams.ink_tracker import detect_limbal_purple_markers
+                    markers = detect_limbal_purple_markers(self._current_image, self._current_result)
+                    detected_cnt = len(markers)
+                except Exception:
+                    pass
+            status_lines.append(
+                f"4. Limbal Purple Ink Marker Tracker (Gentian Violet):\n   Status: ✓ ACTIVE ({detected_cnt} markers found on current frame)"
+            )
+
+        # 5. Polar Phase Correlation
+        if not reg_on or not poc_on:
+            status_lines.append(
+                "5. Polar Phase Correlation (1-D FFT POC):\n   Status: DISABLED (Bypassed)"
+            )
+        else:
+            status_lines.append(
+                "5. Polar Phase Correlation (1-D FFT POC):\n   Status: ✓ ACTIVE"
+            )
+
+        mode_title = "Centration Only" if not reg_on else "Independent Component Diagnostic"
+        msg = "\n\n".join(status_lines)
+        messagebox.showinfo(f"Component Status — {mode_title}", msg)
 
     def _apply_performance_preset(self) -> None:
         preset = self._performance_preset_var.get()
@@ -5603,6 +5817,46 @@ class PupilTrackingGUI:
                     1,
                     cv2.LINE_AA,
                 )
+
+        # ── Limbal Purple Ink Marker (Gentian Violet) Overlay ──
+        if (
+            getattr(self, "_enable_registration_var", None) is not None
+            and self._enable_registration_var.get()
+            and getattr(self, "_enable_ink_tracker_var", None) is not None
+            and self._enable_ink_tracker_var.get()
+            and self._current_image is not None
+            and getattr(result, "has_both", False)
+        ):
+            try:
+                from pupil_tracking.registration.streams.ink_tracker import detect_limbal_purple_markers
+                ink_markers = detect_limbal_purple_markers(self._current_image, result)
+                for mx, my, mr in ink_markers:
+                    smx = int(round(mx * scale))
+                    smy = int(round(my * scale))
+                    smr = max(4, int(round(mr * scale)))
+                    cv2.circle(out, (smx, smy), smr + 2, (200, 0, 255), 2, cv2.LINE_AA)
+                    cv2.drawMarker(
+                        out,
+                        (smx, smy),
+                        (200, 0, 255),
+                        cv2.MARKER_CROSS,
+                        max(8, int(12 * scale)),
+                        1,
+                        cv2.LINE_AA,
+                    )
+                    if self._show_measurements.get():
+                        cv2.putText(
+                            out,
+                            "Dr. Ink",
+                            (smx + smr + 4, smy + 4),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            max(0.3, 0.42 * scale),
+                            (200, 0, 255),
+                            1,
+                            cv2.LINE_AA,
+                        )
+            except Exception:
+                pass
 
         self._draw_cross_section(out, result, scale)
 

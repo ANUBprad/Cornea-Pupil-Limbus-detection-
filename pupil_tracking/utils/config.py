@@ -740,6 +740,8 @@ class RegistrationConfig:
         Enable Stream D: limbal vessel tracking.
     enable_custom_feature : bool
         Enable Stream E: custom-trained iris feature model.
+    enable_iris_features : bool
+        Enable iris landmark / crypts / furrows / collarette feature extraction.
     custom_feature_model_path : str
         Path to ONNX model for Stream E.
     fusion_method : str
@@ -782,6 +784,7 @@ class RegistrationConfig:
     enable_ink_tracker: bool = True
     enable_vessel_tracker: bool = True
     enable_custom_feature: bool = True
+    enable_iris_features: bool = True
 
     # Custom feature model
     custom_feature_model_path: str = "models/iris_features/iris_feature_model.onnx"

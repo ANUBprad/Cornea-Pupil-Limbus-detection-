@@ -139,58 +139,102 @@ class InkTrackerStream(BaseStream):
         image: np.ndarray,
         detection: EyeDetectionResult,
     ) -> List[Tuple[float, float, float]]:
-        """Detect coloured ink markers near the limbus.
-
-        Returns list of (x, y, radius) tuples.
-        """
-        if len(image.shape) != 3 or image.shape[2] != 3:
-            return []
-
-        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-        # Threshold for ink colour
-        ink_mask = cv2.inRange(hsv, self.hsv_lower, self.hsv_upper)
-
-        # Also try a second range for purple wrapping around hue=180
-        hsv_lower2 = np.array([0, 50, 50], dtype=np.uint8)
-        hsv_upper2 = np.array([10, 255, 255], dtype=np.uint8)
-        ink_mask2 = cv2.inRange(hsv, hsv_lower2, hsv_upper2)
-        ink_mask = cv2.bitwise_or(ink_mask, ink_mask2)
-
-        # Morphological cleanup
-        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-        ink_mask = cv2.morphologyEx(ink_mask, cv2.MORPH_OPEN, kernel)
-        ink_mask = cv2.morphologyEx(ink_mask, cv2.MORPH_CLOSE, kernel)
-
-        # Find contours
-        contours, _ = cv2.findContours(
-            ink_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+        """Detect coloured ink markers near the limbus."""
+        return detect_limbal_purple_markers(
+            image=image,
+            detection=detection,
+            hsv_lower=self.hsv_lower,
+            hsv_upper=self.hsv_upper,
         )
 
-        # Filter by size and proximity to limbus
-        le = detection.limbus.ellipse
-        limbus_center = np.array([le.center_x, le.center_y])
-        limbus_radius = le.radius
 
-        markers = []
-        for cnt in contours:
-            area = cv2.contourArea(cnt)
-            if area < 20 or area > 2000:
-                continue
+def detect_limbal_purple_markers(
+    image: np.ndarray,
+    detection: EyeDetectionResult,
+    hsv_lower: Optional[Any] = None,
+    hsv_upper: Optional[Any] = None,
+) -> List[Tuple[float, float, float]]:
+    """Detect purple / gentian violet surgical ink markers placed near the limbus.
 
-            M = cv2.moments(cnt)
-            if M["m00"] == 0:
-                continue
-            cx = M["m10"] / M["m00"]
-            cy = M["m01"] / M["m00"]
+    Parameters
+    ----------
+    image : np.ndarray
+        BGR image containing the eye and limbus.
+    detection : EyeDetectionResult
+        Detection containing valid limbus ellipse.
+    hsv_lower : tuple or np.ndarray, optional
+        Lower HSV bound (default: [120, 50, 50]).
+    hsv_upper : tuple or np.ndarray, optional
+        Upper HSV bound (default: [160, 255, 255]).
 
-            dist = np.sqrt((cx - limbus_center[0])**2 + (cy - limbus_center[1])**2)
+    Returns
+    -------
+    List[Tuple[float, float, float]]
+        List of (x, y, radius) tuples for detected doctor ink markings.
+    """
+    if len(image.shape) != 3 or image.shape[2] != 3:
+        return []
 
-            if 0.7 * limbus_radius < dist < 1.3 * limbus_radius:
-                radius = np.sqrt(area / np.pi)
-                markers.append((cx, cy, radius))
+    if not hasattr(detection, "limbus") or not getattr(detection.limbus, "detected", False):
+        return []
+    le = getattr(detection.limbus, "ellipse", None)
+    if le is None:
+        return []
 
-        return markers
+    if hsv_lower is None:
+        hsv_lower = np.array([120, 50, 50], dtype=np.uint8)
+    elif not isinstance(hsv_lower, np.ndarray):
+        hsv_lower = np.array(hsv_lower, dtype=np.uint8)
+
+    if hsv_upper is None:
+        hsv_upper = np.array([160, 255, 255], dtype=np.uint8)
+    elif not isinstance(hsv_upper, np.ndarray):
+        hsv_upper = np.array(hsv_upper, dtype=np.uint8)
+
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    # Threshold for primary ink colour
+    ink_mask = cv2.inRange(hsv, hsv_lower, hsv_upper)
+
+    # Also try a second range for purple wrapping around hue=180
+    hsv_lower2 = np.array([0, 50, 50], dtype=np.uint8)
+    hsv_upper2 = np.array([10, 255, 255], dtype=np.uint8)
+    ink_mask2 = cv2.inRange(hsv, hsv_lower2, hsv_upper2)
+    ink_mask = cv2.bitwise_or(ink_mask, ink_mask2)
+
+    # Morphological cleanup
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    ink_mask = cv2.morphologyEx(ink_mask, cv2.MORPH_OPEN, kernel)
+    ink_mask = cv2.morphologyEx(ink_mask, cv2.MORPH_CLOSE, kernel)
+
+    # Find contours
+    contours, _ = cv2.findContours(
+        ink_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
+    )
+
+    # Filter by size and proximity to limbus
+    limbus_center = np.array([le.center_x, le.center_y])
+    limbus_radius = le.radius
+
+    markers = []
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area < 20 or area > 2000:
+            continue
+
+        M = cv2.moments(cnt)
+        if M["m00"] == 0:
+            continue
+        cx = M["m10"] / M["m00"]
+        cy = M["m01"] / M["m00"]
+
+        dist = np.sqrt((cx - limbus_center[0])**2 + (cy - limbus_center[1])**2)
+
+        if 0.7 * limbus_radius < dist < 1.3 * limbus_radius:
+            radius = np.sqrt(area / np.pi)
+            markers.append((float(cx), float(cy), float(radius)))
+
+    return markers
 
     def _match_markers(
         self,
