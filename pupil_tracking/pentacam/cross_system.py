@@ -110,6 +110,12 @@ class CrossSystemRegistrationResult:
     confidence: float = 0.0
     quality_assessment: str = ""
 
+    # Phase 2 Clinical Cutoff & Impact
+    clinical_impact: str = ""           # ACCEPTABLE (<=1.5°), BORDERLINE (1.5-3.0°), CRITICAL (>3.0°)
+    astigmatism_loss_percent: float = 0.0  # Estimated toric correction loss (2*sin(|rot|)*100%)
+    torsion_direction: str = ""         # INTORSION, EXCYCLOTORSION, NEUTRAL
+    laterality: str = "OD"              # OD (Right) or OS (Left)
+
     # Diagnostics
     pentacam_features_used: int = 0
     elita_features_used: int = 0
@@ -122,6 +128,10 @@ class CrossSystemRegistrationResult:
             "failure_reason": self.failure_reason,
             "transformation_model": self.transformation_model.value,
             "rotation_deg": round(self.rotation_deg, 4),
+            "clinical_impact": self.clinical_impact,
+            "astigmatism_loss_percent": round(self.astigmatism_loss_percent, 2),
+            "torsion_direction": self.torsion_direction,
+            "laterality": self.laterality,
             "translation_x": round(self.translation_x, 2),
             "translation_y": round(self.translation_y, 2),
             "scale": round(self.scale, 4),

@@ -1,0 +1,118 @@
+{
+  "phase": "Phase 2 & Phase 3 Cyclotorsion Implementation",
+  "date": "2026-09-27",
+  "pentacam_detection_ms": 84.44680000320659,
+  "benchmark_results": [
+    {
+      "target_angle_deg": 0.0,
+      "measured_rotation_deg": 0.0,
+      "error_deg": 0.0,
+      "confidence": 0.749,
+      "clinical_impact": "ACCEPTABLE",
+      "torsion_direction": "NEUTRAL",
+      "astigmatism_loss_percent": 0.0,
+      "processing_time_ms": 62.6,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    },
+    {
+      "target_angle_deg": 1.0,
+      "measured_rotation_deg": 0.9598027467727661,
+      "error_deg": 0.04,
+      "confidence": 0.561,
+      "clinical_impact": "ACCEPTABLE",
+      "torsion_direction": "EXCYCLOTORSION",
+      "astigmatism_loss_percent": 3.35,
+      "processing_time_ms": 59.5,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    },
+    {
+      "target_angle_deg": 2.0,
+      "measured_rotation_deg": 1.9580113887786865,
+      "error_deg": 0.042,
+      "confidence": 0.493,
+      "clinical_impact": "BORDERLINE",
+      "torsion_direction": "EXCYCLOTORSION",
+      "astigmatism_loss_percent": 6.83,
+      "processing_time_ms": 59.5,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    },
+    {
+      "target_angle_deg": 3.0,
+      "measured_rotation_deg": 2.9344139099121094,
+      "error_deg": 0.066,
+      "confidence": 0.369,
+      "clinical_impact": "BORDERLINE",
+      "torsion_direction": "EXCYCLOTORSION",
+      "astigmatism_loss_percent": 10.24,
+      "processing_time_ms": 58.2,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    },
+    {
+      "target_angle_deg": -3.0,
+      "measured_rotation_deg": -2.87847900390625,
+      "error_deg": 0.122,
+      "confidence": 0.405,
+      "clinical_impact": "BORDERLINE",
+      "torsion_direction": "INTORSION",
+      "astigmatism_loss_percent": 10.04,
+      "processing_time_ms": 64.4,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    },
+    {
+      "target_angle_deg": 5.0,
+      "measured_rotation_deg": 4.727616786956787,
+      "error_deg": 0.272,
+      "confidence": 0.36,
+      "clinical_impact": "CRITICAL",
+      "torsion_direction": "EXCYCLOTORSION",
+      "astigmatism_loss_percent": 16.48,
+      "processing_time_ms": 63.6,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    },
+    {
+      "target_angle_deg": -8.0,
+      "measured_rotation_deg": -8.114288330078125,
+      "error_deg": 0.114,
+      "confidence": 0.32,
+      "clinical_impact": "CRITICAL",
+      "torsion_direction": "INTORSION",
+      "astigmatism_loss_percent": 28.23,
+      "processing_time_ms": 61.8,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    },
+    {
+      "target_angle_deg": 12.0,
+      "measured_rotation_deg": 12.0732421875,
+      "error_deg": 0.073,
+      "confidence": 0.298,
+      "clinical_impact": "CRITICAL",
+      "torsion_direction": "EXCYCLOTORSION",
+      "astigmatism_loss_percent": 41.83,
+      "processing_time_ms": 58.1,
+      "meets_cutoff_target": true,
+      "meets_latency_target": true
+    }
+  ],
+  "phase_3_example": {
+    "valid": true,
+    "planned_axis_deg": 90.0,
+    "cyclotorsion_deg": 3.91,
+    "corrected_axis_deg": 93.91,
+    "axis_adjustment_deg": 3.91,
+    "planned_cylinder_power_d": -2.5,
+    "residual_astigmatism_uncorrected_d": 0.34,
+    "residual_astigmatism_corrected_d": 0.0,
+    "correction_loss_avoided_percent": 13.63,
+    "safety_grade": "MEDIUM",
+    "ablation_interlock_approved": true,
+    "clinical_recommendation": "Borderline confidence (0.38). Surgeon review recommended before ablation: Planned 90.0\u00b0 -> Corrected 93.9\u00b0.",
+    "processing_time_ms": 0.01
+  }
+}
