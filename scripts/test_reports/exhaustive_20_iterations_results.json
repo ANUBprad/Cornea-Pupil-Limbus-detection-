@@ -1,0 +1,4628 @@
+{
+  "total_iterations": 20,
+  "passed": 20,
+  "failed": 0,
+  "failure_details": [],
+  "iterations": [
+    {
+      "iteration": 1,
+      "status": "PASS",
+      "total_latency_ms": 17049.48449999938,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 822.9627000000619
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 844.9428999992961
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 832.5480999992578
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1142.1582999973907
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1094.1243000015675
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1031.7580000009912
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1019.7212000020954
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1045.4582999991544
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 991.3421999990533
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1462.7294000019901
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 881.1916999984533
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1425.3161000015098
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 196.49679999929504,
+        "limbus_latency_ms": 255.32689999818103,
+        "total_classical_ms": 451.82369999747607
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.3492000010446645,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 232.44559999875491
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 216.90509999825736
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.29610000026878
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 220.37690000070143
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 227.963199999067
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 227.30560000127298
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 226.13459999774932
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 2,
+      "status": "PASS",
+      "total_latency_ms": 16739.625700000033,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 797.95219999869
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 833.4477999997034
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 824.8426999998628
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1109.271000001172
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1068.8852000021143
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1024.2238999999245
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1063.6014000010618
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1032.6290000011795
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 983.8162999985798
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1441.8627999984892
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 846.1377000021457
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1357.2615000011865
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 197.9745999997249,
+        "limbus_latency_ms": 254.41610000052606,
+        "total_classical_ms": 452.39070000025094
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.068499999149935,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 222.27080000084243
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 207.97769999990123
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.55010000258335
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 222.1797999991395
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 221.05699999883655
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 222.54420000172104
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 221.72869999849354
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 3,
+      "status": "PASS",
+      "total_latency_ms": 16653.79799999937,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 763.7600999987626
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 800.6298000000243
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 818.8726999978826
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1101.5326000015193
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1080.8873000023596
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1007.2083000013663
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1003.6321000006865
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1040.9006999980193
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 1005.9137999996892
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1397.8482999991684
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 857.6677000019117
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1354.0183000004617
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 196.60809999913909,
+        "limbus_latency_ms": 254.9018999998225,
+        "total_classical_ms": 451.5099999989616
+      },
+      "red_light_vectorized": {
+        "latency_ms": 11.347100000421051,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 221.0335000017949
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 205.57600000029197
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 218.89200000077835
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 220.85859999788227
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 220.6003999999666
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 217.32039999915287
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.21889999814448
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 4,
+      "status": "PASS",
+      "total_latency_ms": 17005.055699999502,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 775.4287000025215
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 817.1314999999595
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 814.8843999988458
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1101.6534000009415
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1080.8421000001545
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1033.4364000009373
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1013.7400000021444
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1061.45319999996
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 993.9284000029147
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1439.6428000000014
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 870.6830999981321
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1395.6988000027195
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 204.7885000029055,
+        "limbus_latency_ms": 255.86570000086795,
+        "total_classical_ms": 460.65420000377344
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.592000001750421,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 217.08159999980126
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 205.50929999808432
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 222.5252999996883
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 232.56770000079996
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 221.84109999943757
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 233.2806000013079
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 221.82929999689804
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 5,
+      "status": "PASS",
+      "total_latency_ms": 16870.265600002313,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 756.4979000017047
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 817.299099999218
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 848.1878000020515
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1102.9301000016858
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1131.1134999996284
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1004.3471000026329
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1033.6603999967338
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1059.646599998814
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 979.2821999981243
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1446.9480000007025
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 883.5338999997475
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1355.04199999923
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 194.13319999875966,
+        "limbus_latency_ms": 258.51500000135275,
+        "total_classical_ms": 452.6482000001124
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.2685999984969385,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 220.92820000034408
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 209.02049999858718
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 219.3176000000676
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 224.50640000170097
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 219.37009999965085
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 271.1773000009998
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 217.82430000166642
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 6,
+      "status": "PASS",
+      "total_latency_ms": 16936.88359999942,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 765.9816000013961
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 812.5676000017847
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 813.2664000004297
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1113.719700002548
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1075.5467999988468
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1016.0423000015726
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1021.29369999966
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1056.4428999969095
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 1000.9262000021408
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1438.6010999987775
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 895.3125000007276
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1335.2023999977973
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 175.84999999962747,
+        "limbus_latency_ms": 253.18550000156392,
+        "total_classical_ms": 429.0355000011914
+      },
+      "red_light_vectorized": {
+        "latency_ms": 6.846100000984734,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 219.47450000152458
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 210.44529999926453
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 223.50360000200453
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 219.87309999894933
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 221.57529999822145
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 226.2278000016522
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 230.63270000056946
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 7,
+      "status": "PASS",
+      "total_latency_ms": 16771.36459999747,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 773.8356000008935
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 805.8277999989514
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 817.510000000766
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1122.6796000009927
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1081.1717999968096
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1027.2520000035001
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1022.9173999978229
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1028.538500002469
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 991.5141999990738
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1414.7475999998278
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 865.1210999996692
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1349.2870999980369
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 177.7299999994284,
+        "limbus_latency_ms": 248.42910000006668,
+        "total_classical_ms": 426.1590999994951
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.17840000288561,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 227.5191000007908
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 209.09210000172607
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 225.1021000010951
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 219.37890000117477
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 222.84700000091107
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 220.2142999994976
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 226.08240000045043
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 8,
+      "status": "PASS",
+      "total_latency_ms": 16735.405700001138,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 770.6142999995791
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 809.5830999991449
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 818.4521999974095
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1098.6866999992344
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1089.002900000196
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1008.0496999980824
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 994.1695000015898
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1029.6841999988828
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 987.5608000002103
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1419.7340999999142
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 862.6618000016606
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1354.167099998449
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 186.1748000010266,
+        "limbus_latency_ms": 253.87770000088494,
+        "total_classical_ms": 440.05250000191154
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.19799999933457,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 226.68549999798415
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 212.05050000207848
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 226.8767999994452
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 224.3957999999111
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 221.64239999983693
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 222.32360000271
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 223.15049999815528
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 9,
+      "status": "PASS",
+      "total_latency_ms": 16831.414600001153,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 782.4044000008143
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 829.8348999996961
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 806.3021999987541
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1118.312499998865
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1075.6490000021586
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1026.964399999997
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1005.4258000018308
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1028.1716999998025
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 991.0233000009612
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1423.575199998595
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 925.4647999987355
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1354.3774999998277
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 198.347500001546,
+        "limbus_latency_ms": 274.0200000007462,
+        "total_classical_ms": 472.3675000022922
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.108900001185248,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 219.51199999966775
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 210.69440000064787
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 222.16040000057546
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 220.8091999964381
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 218.3194999997795
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 215.58189999996102
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 225.49570000046515
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 10,
+      "status": "PASS",
+      "total_latency_ms": 16828.355000001466,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 799.6540999993158
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 802.9824000004737
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 812.5983999998425
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1131.9142000029387
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1071.4718000017456
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1032.8270999998495
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1008.351100001164
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1023.623499997484
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 998.205700001563
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1396.2047000022721
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 871.0203000009642
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1360.62320000201
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 199.32189999963157,
+        "limbus_latency_ms": 260.85219999731635,
+        "total_classical_ms": 460.1740999969479
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.043300000077579,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 219.77269999842974
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 205.19979999880888
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.09130000151345
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 222.1209999988787
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 218.24289999858593
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 219.60369999942486
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 218.1769999988319
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 11,
+      "status": "PASS",
+      "total_latency_ms": 16856.183600000804,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 781.7057000029308
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 831.5106999980344
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 811.6475000024366
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1112.7543000002333
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1082.6341999963915
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1019.8402000023634
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1031.032699997013
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1030.6024999990768
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 1002.7368999981263
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1423.7734999987879
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 870.4241999985243
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1386.5802999971493
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 204.57430000169552,
+        "limbus_latency_ms": 255.20920000053593,
+        "total_classical_ms": 459.78350000223145
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.426100000884617,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 220.85080000033486
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 203.23949999874458
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.44559999994817
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 220.16219999932218
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 219.3160999995598
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 221.8761000003724
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 218.78109999670414
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 12,
+      "status": "PASS",
+      "total_latency_ms": 16776.581899997836,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 779.3044999998529
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 815.8602000003157
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 816.2640999980795
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1106.161300001986
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1080.480800002988
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1014.7114999999758
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1009.5666999986861
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1034.764100000757
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 987.9360999984783
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1402.019699999073
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 856.0237000019697
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1362.3325000007753
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 199.6980000003532,
+        "limbus_latency_ms": 255.0904999989143,
+        "total_classical_ms": 454.7884999992675
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.123299998056609,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 223.97500000079162
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 206.8135000008624
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.10779999982333
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 219.68270000070333
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 219.79369999826304
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 219.91509999861591
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 228.06560000026366
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 13,
+      "status": "PASS",
+      "total_latency_ms": 16866.77839999902,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 795.5815000022994
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 822.5640999989992
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 813.6531000018294
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1096.1131999974896
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1089.4310000003316
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1020.1928999995289
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1029.0529000012612
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1025.5352999993192
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 995.0719999978901
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1468.6067000002367
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 859.4126000025426
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1357.3823000006087
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 203.37120000112918,
+        "limbus_latency_ms": 253.76719999985653,
+        "total_classical_ms": 457.1384000009857
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.158700002037222,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 220.86879999915254
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 205.37960000001476
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 222.83270000116318
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 218.7420000009297
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 218.40250000241213
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 218.866800001706
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 219.43070000270382
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 14,
+      "status": "PASS",
+      "total_latency_ms": 16787.998900003004,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 789.4613999997091
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 810.0899999990361
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 813.4142000017164
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1120.8294999996724
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1060.900500000571
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1007.0740999981354
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 999.4174999992538
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1021.5160999978252
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 974.3264999997336
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1401.5820999993593
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 854.1482000000542
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1382.6085000000603
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 174.18990000078338,
+        "limbus_latency_ms": 241.76579999766545,
+        "total_classical_ms": 415.95569999844884
+      },
+      "red_light_vectorized": {
+        "latency_ms": 8.203500001400243,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 217.48430000297958
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 229.31419999804348
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.00649999972666
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 219.09099999902537
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 217.6393999980064
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 219.91220000199974
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 215.633899999375
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 15,
+      "status": "PASS",
+      "total_latency_ms": 16629.33829999747,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 754.572099998768
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 789.3464000007953
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 798.7962000006519
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1079.9322000020766
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1065.1562999992166
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1021.4053999989119
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1009.1623999978765
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1036.5176999985124
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 990.9000999978161
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1433.1507999995665
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 860.4095000009693
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1334.8205000002054
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 180.20769999930053,
+        "limbus_latency_ms": 248.97689999852446,
+        "total_classical_ms": 429.184599997825
+      },
+      "red_light_vectorized": {
+        "latency_ms": 6.949899998289766,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 225.75830000278074
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 207.69040000232053
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.71879999930388
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 216.92600000096718
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 223.79410000212374
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 218.82710000136285
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 218.93800000179908
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 16,
+      "status": "PASS",
+      "total_latency_ms": 16849.414200001775,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 777.1697999996832
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 802.185600001394
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 817.0773000019835
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1145.4708999990544
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1085.8976999988954
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1030.9597000014037
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1021.5623000003689
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1034.042800001771
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 999.0892999994685
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1416.2432000011904
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 865.6934999999066
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1352.3839999979828
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 177.35499999980675,
+        "limbus_latency_ms": 250.70550000236835,
+        "total_classical_ms": 428.0605000021751
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.30449999900884,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 221.1637000000337
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 206.63490000151796
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 222.30470000067726
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 227.6330999993661
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 221.23419999843463
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 256.61179999951855
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 222.48599999875296
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 17,
+      "status": "PASS",
+      "total_latency_ms": 16766.883000000234,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 790.7755999985966
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 809.3908000009833
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 806.3817000002018
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1101.7711000022246
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1087.9313000004913
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1021.1916000007477
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1015.1092999985849
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1035.8851999990293
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 1007.3750999981712
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1422.9729999970004
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 862.571100002242
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1357.982900000934
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 174.6469000026991,
+        "limbus_latency_ms": 244.305300002452,
+        "total_classical_ms": 418.9522000051511
+      },
+      "red_light_vectorized": {
+        "latency_ms": 6.819200003519654,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 219.7608999995282
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 210.02109999972163
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 221.4748000005784
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 222.64650000215624
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 219.72359999926994
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 218.85140000085812
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 222.78430000005756
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 18,
+      "status": "PASS",
+      "total_latency_ms": 16751.80140000157,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 784.3203000011272
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 821.5818999997282
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 801.3277000027301
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1130.8554000024742
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1068.1251999994856
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1019.8845000013534
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1029.0468000021065
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1038.24380000151
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 1006.7662000001292
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1429.873500001122
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 857.9136000007566
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1335.1041999994777
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 173.48649999985355,
+        "limbus_latency_ms": 248.29490000047372,
+        "total_classical_ms": 421.78140000032727
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.233799999085022,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 223.05989999949816
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 204.57210000313353
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 225.0004000015906
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 218.9299999990908
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 219.2362999994657
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 217.93139999863342
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 220.89210000194726
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 19,
+      "status": "PASS",
+      "total_latency_ms": 16793.14290000184,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 773.3689999986382
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 793.3669000012742
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 848.2005000005302
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1103.1469000008656
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1089.6853000012925
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1020.914199998515
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1012.0988999988185
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1019.5590999974229
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 1003.0076000002737
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1417.422999998962
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 843.8237000009394
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1340.2247000012721
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 241.25350000031176,
+        "limbus_latency_ms": 314.93740000223625,
+        "total_classical_ms": 556.190900002548
+      },
+      "red_light_vectorized": {
+        "latency_ms": 7.888899999670684,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 219.2904000003182
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 204.09259999723872
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 217.8864000015892
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 221.72200000204612
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 217.8301999992982
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 219.58059999815305
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 215.7108999999764
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    },
+    {
+      "iteration": 20,
+      "status": "PASS",
+      "total_latency_ms": 16852.650999997422,
+      "clinical_images": {
+        "eye_01.jpeg": {
+          "pupil_center": [
+            381.5248484202482,
+            334.09462999962386
+          ],
+          "pupil_radius": 82.3951785279695,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            383.46451719360675,
+            322.74385578668597
+          ],
+          "limbus_radius": 225.9441677856679,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 756.9785000014235
+        },
+        "eye_02.jpeg": {
+          "pupil_center": [
+            480.6675200811559,
+            468.49157383185707
+          ],
+          "pupil_radius": 60.701436418378435,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            504.26726589530494,
+            457.0858645843057
+          ],
+          "limbus_radius": 215.5612510870091,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 814.8556999985885
+        },
+        "eye_03.jpeg": {
+          "pupil_center": [
+            465.7631903375302,
+            477.1296606227114
+          ],
+          "pupil_radius": 61.1591651010082,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            491.9959241594925,
+            463.75292135872866
+          ],
+          "limbus_radius": 220.2960628822941,
+          "limbus_conf": 0.6720000000000002,
+          "latency_ms": 845.2131999983976
+        },
+        "eye_06.jpeg": {
+          "pupil_center": [
+            620.9725299866658,
+            579.0182908809064
+          ],
+          "pupil_radius": 144.90956004913227,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1098.491799999465
+        },
+        "eye_07.jpeg": {
+          "pupil_center": [
+            586.0009759575357,
+            581.5355202725536
+          ],
+          "pupil_radius": 148.09887928054815,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1061.6330999982893
+        },
+        "eye_08.jpeg": {
+          "pupil_center": [
+            522.1420549827633,
+            523.3178276872802
+          ],
+          "pupil_radius": 145.910971191284,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1004.3645999976434
+        },
+        "eye_09.jpeg": {
+          "pupil_center": [
+            521.2451823220448,
+            523.9273654767759
+          ],
+          "pupil_radius": 146.39138532402214,
+          "pupil_conf": 0.798,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1018.468499998562
+        },
+        "eye_10.jpeg": {
+          "pupil_center": [
+            548.0332982973401,
+            545.9179771172398
+          ],
+          "pupil_radius": 136.40103568379345,
+          "pupil_conf": 0.525,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1081.1211000000185
+        },
+        "eye_11.jpeg": {
+          "pupil_center": [
+            537.6318035560824,
+            532.9288935332481
+          ],
+          "pupil_radius": 136.03742504029356,
+          "pupil_conf": 0.798,
+          "limbus_center": [
+            541.4095110856413,
+            518.8685137191288
+          ],
+          "limbus_radius": 357.47958874857267,
+          "limbus_conf": 0.525,
+          "latency_ms": 997.5393999993685
+        },
+        "eye_12.jpeg": {
+          "pupil_center": [
+            817.6758462294933,
+            821.3780161622151
+          ],
+          "pupil_radius": 208.04274078957613,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1414.817300003051
+        },
+        "eye_13.jpeg": {
+          "pupil_center": [
+            515.6116181096831,
+            519.1249463887693
+          ],
+          "pupil_radius": 68.59127901167777,
+          "pupil_conf": 0.8400000000000001,
+          "limbus_center": [
+            531.1405660635294,
+            502.5460946867454
+          ],
+          "limbus_radius": 245.08545231613715,
+          "limbus_conf": 0.525,
+          "latency_ms": 881.4386999983981
+        },
+        "eye_14.jpeg": {
+          "pupil_center": [
+            747.1252720863337,
+            733.3531890917877
+          ],
+          "pupil_radius": 197.34852075556915,
+          "pupil_conf": 0.6720000000000002,
+          "limbus_center": null,
+          "limbus_radius": null,
+          "limbus_conf": 0.5,
+          "latency_ms": 1348.4126000003016
+        }
+      },
+      "classical_fallback": {
+        "pupil_detected": true,
+        "limbus_detected": true,
+        "pupil_latency_ms": 197.83370000004652,
+        "limbus_latency_ms": 250.4817999979423,
+        "total_classical_ms": 448.3154999979888
+      },
+      "red_light_vectorized": {
+        "latency_ms": 6.926799997017952,
+        "clusters_detected": 1
+      },
+      "calibration": {
+        "wtw_dynamic_small_mm": 9.887640449438202,
+        "wtw_dynamic_large_mm": 11.685393258426966,
+        "anchor_assumed_mm": 11.5
+      },
+      "cyclotorsion": {
+        "0.0": {
+          "ground_truth_deg": 0.0,
+          "estimated_deg": 0.0002586539089496293,
+          "angular_error_deg": 0.0002586539089496293,
+          "latency_ms": 222.48100000069826
+        },
+        "1.0": {
+          "ground_truth_deg": 1.0,
+          "estimated_deg": 1.018087658956436,
+          "angular_error_deg": 0.018087658956436048,
+          "latency_ms": 211.2721999983478
+        },
+        "-1.0": {
+          "ground_truth_deg": -1.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 222.83400000014808
+        },
+        "3.0": {
+          "ground_truth_deg": 3.0,
+          "estimated_deg": 2.9857721632013674,
+          "angular_error_deg": 0.014227836798632598,
+          "latency_ms": 222.0740000011574
+        },
+        "-3.0": {
+          "ground_truth_deg": -3.0,
+          "estimated_deg": 357.01340262966727,
+          "angular_error_deg": 0.013402629667268684,
+          "latency_ms": 224.81089999928372
+        },
+        "5.0": {
+          "ground_truth_deg": 5.0,
+          "estimated_deg": 5.003272744951827,
+          "angular_error_deg": 0.0032727449518272778,
+          "latency_ms": 228.08609999992768
+        },
+        "359.0": {
+          "ground_truth_deg": 359.0,
+          "estimated_deg": 359.00048255061296,
+          "angular_error_deg": 0.00048255061295776613,
+          "latency_ms": 226.85789999741246
+        }
+      },
+      "toric_axis": {
+        "zero_rot_delivered": 90.0,
+        "three_deg_delivered": 93.0,
+        "three_deg_loss_pct": 10.467191248588767
+      }
+    }
+  ]
+}
