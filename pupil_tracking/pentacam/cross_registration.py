@@ -1,22 +1,14 @@
-"""Cross-modality iris registration between Pentacam (seated IR) and ELITA (supine RGB/Grayscale).
+"""Experimental cross-modality iris registration for Pentacam and ELITA images.
 
-Implements Phase 2 Cyclotorsion & Iris Registration:
-    - Matches seated Pentacam reference image with intra-operative supine ELITA image.
-    - Works across spectral modalities (IR 850nm vs RGB/Grayscale).
-    - Unwraps iris stroma into polar coordinates (Daugman rubber-sheet model).
-    - Computes rotation angle (theta) via Phase-Only Correlation (POC) & landmark consensus.
-    - Classifies cyclotorsion into clinical cutoff ranges:
-        * GOOD / ACCEPTABLE: <= 1.5 deg (minimal impact)
-        * BORDERLINE: 1.5 - 3.0 deg (requires compensation)
-        * CRITICAL / BAD: > 3.0 - 6.0+ deg (high risk of failed toric correction)
-    - Estimates astigmatic under-correction percentage (Alpins vector 3-degree rule).
-    - Measures intorsion vs excyclotorsion based on eye laterality (OD / OS).
-    - Strictly isolates and protects frozen centration/pupil/limbus pipeline.
-    - Latency <= 150 ms (measured ~15-30 ms).
+The implementation estimates rigid angular shift from polar iris strips and
+landmark descriptors. Synthetic rigid-rotation tests do not establish clinical
+accuracy; pupil dilation, nonrigid deformation, reflections, and live-frame
+latency require separate validation on representative clinical data.
 """
 
 from __future__ import annotations
 
+import hashlib
 import logging
 import math
 import time
@@ -56,6 +48,8 @@ class CrossModalityRegistrationEngine:
         self.unwrapper = PolarUnwrapper(num_angles=num_angles, num_radial=num_radial)
         self.enhancer = IrisEnhancer()
         self.pentacam_detector = PentacamIrisDetector()
+        self._cached_reference_key: Optional[Tuple[Tuple[int, ...], str, bytes]] = None
+        self._cached_reference_result: Optional[PentacamDetectionResult] = None
 
         # Dynamic mode temporal filter state
         self._temporal_history: List[float] = []
@@ -105,9 +99,21 @@ class CrossModalityRegistrationEngine:
                 processing_time_ms=(time.perf_counter() - t0) * 1000.0,
             )
 
-        # 2. Run Pentacam detection if not provided
+        # 2. Reuse detection for an unchanged static reference image.
         if pentacam_result is None or not pentacam_result.valid:
-            pentacam_result = self.pentacam_detector.detect(pentacam_image)
+            contiguous_image = np.ascontiguousarray(pentacam_image)
+            reference_key = (
+                tuple(pentacam_image.shape),
+                pentacam_image.dtype.str,
+                hashlib.blake2b(contiguous_image.view(np.uint8), digest_size=16).digest(),
+            )
+            if reference_key == self._cached_reference_key:
+                pentacam_result = self._cached_reference_result
+            else:
+                pentacam_result = self.pentacam_detector.detect(pentacam_image)
+                if pentacam_result.valid:
+                    self._cached_reference_key = reference_key
+                    self._cached_reference_result = pentacam_result
 
         if not pentacam_result.valid or not pentacam_result.geometry.pupil_detected:
             return CrossSystemRegistrationResult(
@@ -164,23 +170,25 @@ class CrossModalityRegistrationEngine:
         if mode == "dynamic":
             fused_theta = self._apply_temporal_smoothing(fused_theta, fused_conf)
 
-        # 8. Classify clinical impact & astigmatism loss
+        # 8. Calculate model-based toric metrics; these are not clinical outcomes.
         abs_theta = abs(fused_theta)
 
         if abs_theta <= 1.5:
             clinical_impact = "ACCEPTABLE"
-            quality_desc = "Good / Acceptable (<=1.5 deg): Minimal impact on toric correction."
+            quality_desc = "Heuristic angular-offset bin: <=1.5 deg."
         elif abs_theta <= 3.0:
             clinical_impact = "BORDERLINE"
-            quality_desc = "Borderline (1.5-3.0 deg): Requires compensation; risk of partial correction loss."
+            quality_desc = "Heuristic angular-offset bin: 1.5-3.0 deg."
         else:
             clinical_impact = "CRITICAL"
-            quality_desc = "Critical (>3.0 deg): High risk of failed toric astigmatism correction; must correct axis."
+            quality_desc = "Heuristic angular-offset bin: >3.0 deg."
 
-        # Astigmatic vector under-correction (Alpins 3-degree rule: 2*sin(|theta|)*100%)
-        # 3 deg -> ~10.5%, 4 deg -> ~13.9%, 30 deg -> 100%
+        # Residual cylinder relative to planned correction (Alpins vector magnitude).
         theta_rad = math.radians(abs_theta)
         astigmatism_loss_pct = float(min(100.0, 2.0 * math.sin(theta_rad) * 100.0))
+        toric_effectiveness_loss_pct = float(
+            100.0 * (1.0 - math.cos(2.0 * theta_rad))
+        )
 
         # Intorsion vs Excyclotorsion direction:
         # Fused theta > 0 = counter-clockwise rotation of the eye image
@@ -213,6 +221,7 @@ class CrossModalityRegistrationEngine:
             rotation_deg=float(fused_theta),
             clinical_impact=clinical_impact,
             astigmatism_loss_percent=astigmatism_loss_pct,
+            toric_effectiveness_loss_percent=toric_effectiveness_loss_pct,
             torsion_direction=torsion_dir,
             laterality=laterality,
             translation_x=0.0,

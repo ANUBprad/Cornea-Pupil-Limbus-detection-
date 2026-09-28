@@ -8,11 +8,11 @@ anterior segment and Scheimpflug eye imagery:
     4. Detects distinctive iris landmarks (crypts, collarette, furrows, pigment spots).
     5. Extracts contrast-invariant multi-scale descriptors for cross-modality matching.
 
-Meets Phase 2 clinical constraints:
+Implementation goals (not clinical validation):
     - Purely additive, non-mutating.
     - Zero interference with existing ELITA centration pipeline.
     - Rejects UI feathers and overlays.
-    - Operates in < 50 ms.
+    - Runtime depends on image size, hardware, and OpenCV build; benchmark on target data.
 """
 
 from __future__ import annotations

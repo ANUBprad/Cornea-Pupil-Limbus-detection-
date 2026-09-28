@@ -110,9 +110,10 @@ class CrossSystemRegistrationResult:
     confidence: float = 0.0
     quality_assessment: str = ""
 
-    # Phase 2 Clinical Cutoff & Impact
+    # Experimental heuristic bins; not a validated clinical recommendation.
     clinical_impact: str = ""           # ACCEPTABLE (<=1.5°), BORDERLINE (1.5-3.0°), CRITICAL (>3.0°)
-    astigmatism_loss_percent: float = 0.0  # Estimated toric correction loss (2*sin(|rot|)*100%)
+    astigmatism_loss_percent: float = 0.0  # Legacy name: residual cylinder ratio (2*sin(|rot|)*100%)
+    toric_effectiveness_loss_percent: float = 0.0  # 100*(1-cos(2*|rot|))
     torsion_direction: str = ""         # INTORSION, EXCYCLOTORSION, NEUTRAL
     laterality: str = "OD"              # OD (Right) or OS (Left)
 
@@ -130,6 +131,7 @@ class CrossSystemRegistrationResult:
             "rotation_deg": round(self.rotation_deg, 4),
             "clinical_impact": self.clinical_impact,
             "astigmatism_loss_percent": round(self.astigmatism_loss_percent, 2),
+            "toric_effectiveness_loss_percent": round(self.toric_effectiveness_loss_percent, 2),
             "torsion_direction": self.torsion_direction,
             "laterality": self.laterality,
             "translation_x": round(self.translation_x, 2),

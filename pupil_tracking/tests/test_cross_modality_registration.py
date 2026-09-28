@@ -1,12 +1,12 @@
-"""Unit tests for CrossModalityRegistrationEngine.
+"""Synthetic rigid-rotation tests for CrossModalityRegistrationEngine.
 
-Verifies Phase 2 Cyclotorsion & Iris Registration:
-    - Accurate rotation recovery (<= 1.5 deg error margin, target <= 1.0 deg)
-    - Clinical cutoff classification (ACCEPTABLE, BORDERLINE, CRITICAL)
-    - Alpins 3-degree rule astigmatic loss estimation
+These tests do not establish accuracy on clinical images or nonrigid eye motion.
+They verify rotation recovery on generated images and implementation behavior.
+    - Rotation recovery on synthetic rigid rotations
+    - Model-based toric metric arithmetic (not clinical outcomes)
     - Intorsion vs Excyclotorsion classification for OD and OS laterality
     - RGB and Grayscale ELITA image compatibility
-    - Real-time latency <= 150 ms
+    - Warm-reference CPU latency <= 150 ms on the test environment
 """
 
 from __future__ import annotations
@@ -113,8 +113,38 @@ class TestCrossModalityRegistrationEngine:
         img_3 = rotate_image(img_ref, 5.0, center)
         res_3 = engine.register(img_ref, img_3, elita_detection=det_elita)
         assert res_3.clinical_impact == "CRITICAL"
-        # 3-degree rule: 5 deg produces ~17.4% under-correction
+        # Residual cylinder is linear near zero; effectiveness loss is quadratic.
         assert res_3.astigmatism_loss_percent > 10.0
+        measured_theta = math.radians(abs(res_3.rotation_deg))
+        assert res_3.astigmatism_loss_percent == pytest.approx(
+            2.0 * math.sin(measured_theta) * 100.0, abs=0.1
+        )
+        assert res_3.toric_effectiveness_loss_percent == pytest.approx(
+            (1.0 - math.cos(2.0 * measured_theta)) * 100.0, abs=0.1
+        )
+
+    def test_reference_detection_is_cached_by_image_content(self, monkeypatch):
+        engine = CrossModalityRegistrationEngine()
+        img_ref = create_synthetic_pentacam_image(with_ui=False)
+        center = (256.0, 256.0)
+        img_elita = rotate_image(img_ref, 2.0, center)
+        detection = make_elita_detection(center)
+        original_detect = engine.pentacam_detector.detect
+        calls = 0
+
+        def counted_detect(image, *args, **kwargs):
+            nonlocal calls
+            calls += 1
+            return original_detect(image, *args, **kwargs)
+
+        monkeypatch.setattr(engine.pentacam_detector, "detect", counted_detect)
+        engine.register(img_ref, img_elita, elita_detection=detection)
+        engine.register(img_ref, img_elita, elita_detection=detection)
+        assert calls == 1
+
+        img_ref[0, 0] = (int(img_ref[0, 0]) + 1) % 256
+        engine.register(img_ref, img_elita, elita_detection=detection)
+        assert calls == 2
 
     def test_laterality_direction(self):
         """Verify OD vs OS intorsion and excyclotorsion assignment."""

@@ -9,7 +9,8 @@ Plan-aligned changes:
   S3  - Batch collection from decode-ahead queue
   S4  - Bilateral filter removed from fast path
 
-Target: < 50 ms per frame (GPU), < 80 ms per frame (CPU)
+Performance budgets: < 50 ms/frame (GPU), < 80 ms/frame (CPU). These are
+targets, not verified guarantees; benchmark end-to-end on the target hardware.
 """
 
 import csv

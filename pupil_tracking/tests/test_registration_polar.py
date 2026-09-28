@@ -40,3 +40,27 @@ def test_polar_unwrapping_synthetic():
     assert polar.valid is True
     assert polar.image is not None
     assert polar.image.shape == (32, 180)
+
+
+def test_polar_unwrapping_uses_nearest_source_pixels():
+    image = np.arange(200 * 200, dtype=np.uint8).reshape(200, 200)
+    unwrapper = PolarUnwrapper(
+        num_angles=8,
+        num_radial=5,
+        inner_margin=0.0,
+        outer_margin=0.0,
+    )
+
+    polar = unwrapper.unwrap(
+        image,
+        pupil_center=(100.0, 100.0),
+        pupil_axes=(20.0, 20.0),
+        pupil_angle_deg=0.0,
+        limbus_center=(100.0, 100.0),
+        limbus_axes=(60.0, 60.0),
+        limbus_angle_deg=0.0,
+    )
+
+    expected_x = np.rint(np.linspace(20.0, 60.0, 5) + 100.0).astype(int)
+    np.testing.assert_array_equal(polar.image[:, 0], image[100, expected_x])
+    np.testing.assert_array_equal(polar.mask[:, 0], np.full(5, 255, dtype=np.uint8))

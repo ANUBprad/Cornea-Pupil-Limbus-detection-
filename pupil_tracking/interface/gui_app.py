@@ -334,7 +334,18 @@ class PupilTrackingGUI:
                 tag = "GPU" if _FAST_PIPELINE_AVAILABLE else "GPU (classic)"
                 self._model_status_var.set(f"Model: Ready ({tag})")
             else:
-                self._model_status_var.set("Model: Classical Only (ML unavailable)")
+                model_path = getattr(self._detector.ml_engine, "model_path", None)
+                if model_path and not Path(model_path).is_file():
+                    reason = "weights missing"
+                elif model_path:
+                    reason = "weights failed to load"
+                else:
+                    reason = "ML runtime unavailable"
+                self._model_status_var.set(f"Model: Classical Only ({reason})")
+                self.logger.warning(
+                    "ML segmentation unavailable; using classical detection. Model path: %s",
+                    model_path or "not configured",
+                )
 
             self._status_var.set("Ready — Load an image or start camera")
         except Exception as exc:

@@ -132,35 +132,32 @@ class PolarUnwrapper:
             logger.warning("No valid angular range for polar unwrapping")
             return result
 
-        # Build sampling grid
-        polar_img = np.zeros((self.num_radial, self.num_angles), dtype=np.float32)
-        polar_mask = np.zeros((self.num_radial, self.num_angles), dtype=np.uint8)
-
+        # Build the full sampling grid with array operations, then let OpenCV
+        # perform nearest-neighbour sampling in native code.
         cx, cy = limbus_center
+        radii = np.linspace(inner_radii, outer_radii, self.num_radial, axis=0)
+        cos_a = np.cos(angles)[None, :]
+        sin_a = np.sin(angles)[None, :]
+        x_int = np.rint(cx + radii * cos_a).astype(np.int32)
+        y_int = np.rint(cy + radii * sin_a).astype(np.int32)
+        in_bounds = (
+            valid_angles[None, :]
+            & (x_int >= 0)
+            & (x_int < w)
+            & (y_int >= 0)
+            & (y_int < h)
+        )
 
-        for ai in range(self.num_angles):
-            if not valid_angles[ai]:
-                continue
-
-            r_inner = inner_radii[ai]
-            r_outer = outer_radii[ai]
-            radii = np.linspace(r_inner, r_outer, self.num_radial)
-
-            cos_a = np.cos(angles[ai])
-            sin_a = np.sin(angles[ai])
-
-            xs = cx + radii * cos_a
-            ys = cy + radii * sin_a
-
-            # Bounds check
-            x_int = np.round(xs).astype(int)
-            y_int = np.round(ys).astype(int)
-            in_bounds = (x_int >= 0) & (x_int < w) & (y_int >= 0) & (y_int < h)
-
-            for ri in range(self.num_radial):
-                if in_bounds[ri]:
-                    polar_img[ri, ai] = gray[y_int[ri], x_int[ri]]
-                    polar_mask[ri, ai] = 255
+        polar_img = cv2.remap(
+            gray,
+            x_int.astype(np.float32),
+            y_int.astype(np.float32),
+            interpolation=cv2.INTER_NEAREST,
+            borderMode=cv2.BORDER_CONSTANT,
+            borderValue=0,
+        ).astype(np.float32, copy=False)
+        polar_img[~in_bounds] = 0.0
+        polar_mask = in_bounds.astype(np.uint8) * 255
 
         result.image = polar_img
         result.mask = polar_mask
