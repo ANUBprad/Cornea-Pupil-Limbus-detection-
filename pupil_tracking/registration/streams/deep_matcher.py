@@ -146,8 +146,10 @@ class DeepMatcherStream(BaseStream):
             pts_curr[:, 0] - crop_center[0],
         )
 
-        # Angular differences
-        diffs = (angles_curr - angles_ref + np.pi) % (2 * np.pi) - np.pi
+        # Angular differences. Image y points down, so a counter-clockwise
+        # rotation on screen (cv2 positive angle) DECREASES arctan2 angles.
+        # The displacement is therefore angles_ref - angles_curr.
+        diffs = (angles_ref - angles_curr + np.pi) % (2 * np.pi) - np.pi
 
         # RANSAC-style robust estimation
         torsion_rad, inlier_mask = self._robust_rotation_estimate(diffs)

@@ -96,10 +96,12 @@ class InkTrackerStream(BaseStream):
                            "matched": len(matches)}
             )
 
-        # Compute angular differences for matched pairs
+        # Compute angular differences for matched pairs. Image y points down,
+        # so a counter-clockwise rotation on screen (cv2 positive angle)
+        # DECREASES arctan2 angles; displacement is angles_ref - angles_curr.
         diffs = []
         for ri, ci in matches:
-            diff = (angles_curr[ci] - angles_ref[ri] + np.pi) % (2 * np.pi) - np.pi
+            diff = (angles_ref[ri] - angles_curr[ci] + np.pi) % (2 * np.pi) - np.pi
             diffs.append(diff)
         diffs = np.array(diffs)
 
