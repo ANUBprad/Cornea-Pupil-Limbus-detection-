@@ -809,7 +809,7 @@ class RegistrationConfig:
     # Stream-specific parameters
     poc_upsample_factor: int = 100
     poc_min_psr: float = 5.0
-    poc_min_peak_separation: float = 0.30
+    poc_min_peak_separation: float = 0.45
 
     deep_matcher_max_keypoints: int = 500
 
