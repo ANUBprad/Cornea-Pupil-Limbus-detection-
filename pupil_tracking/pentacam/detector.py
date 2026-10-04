@@ -277,11 +277,13 @@ class PentacamIrisDetector:
             )
 
         # 2. Limbus localization
-        # Limbus is approximately concentric with pupil, with radius 2.2x to 3.5x pupil radius
+        # Limbus is approximately concentric with the pupil. The lower bound only
+        # needs to clear the pupil edge (~1.0x pr): at 2.0 it sat above a measured
+        # iris->sclera transition (1.95x pr), pinning argmax to index 0.
         pcx, pcy = best_pupil.center_x, best_pupil.center_y
         pr = best_pupil.radius
 
-        min_limbus_r = pr * 2.0
+        min_limbus_r = pr * 1.7
         max_limbus_r = min(pr * 3.8, min(pcx, w - pcx, pcy, h - pcy) * 0.95)
 
         # The limbus is only localized when the steepest iris-to-sclera brightening

@@ -206,7 +206,7 @@ class TestPentacamLimbusFallback:
 
         assert geom.pupil_detected is True
         assert geom.limbus_detected is True
-        assert geom.limbus_radius_px == pytest.approx(geom.pupil_radius_px * 2.0)
+        assert geom.limbus_radius_px == pytest.approx(geom.pupil_radius_px * 1.7)
 
     def test_degenerate_search_window_is_not_valid(self):
         """min_limbus_r >= max_limbus_r means no search runs at all."""
@@ -272,3 +272,75 @@ class TestPentacamLimbusFallback:
         assert d["geometry"]["limbus_localized"] is False
         assert d["status"] == PentacamDetectionStatus.NO_LIMBUS.value
         assert d["valid"] is False
+
+
+class TestPentacamLimbusSearchFloor:
+    """The lower search bound must clear the pupil edge without excluding the limbus.
+
+    The floor used to be 2.0x pupil radius. A real Pentacam capture measured its
+    iris->sclera transition at 1.95x, so the window opened past the transition,
+    argmax stayed on index 0, and b428614 correctly reported NO_LIMBUS.
+    """
+
+    def test_sub_two_ratio_limbus_is_localized(self):
+        img = create_synthetic_pentacam_image(pupil_r=60.0, limbus_r=117.0)
+        det = PentacamIrisDetector()
+        res = det.detect(img)
+        geom = res.geometry
+
+        assert geom.limbus_localized is True
+        assert geom.limbus_radius_px == pytest.approx(117.0, abs=5.0)
+
+        # Interior maximum, not pinned to either window bound.
+        h, w = img.shape
+        pr = geom.pupil_radius_px
+        floor = pr * 1.7
+        ceiling = min(pr * 3.8,
+                      min(geom.pupil.center_x, w - geom.pupil.center_x,
+                          geom.pupil.center_y, h - geom.pupil.center_y) * 0.95)
+        assert floor < geom.limbus_radius_px < ceiling
+
+        assert res.valid is True
+        assert res.status == PentacamDetectionStatus.OK
+
+    @pytest.mark.parametrize("limbus_r", [117.0, 130.0, 150.0, 160.0])
+    def test_known_limbus_ratios_stay_accurate(self, limbus_r):
+        img = create_synthetic_pentacam_image(pupil_r=60.0, limbus_r=limbus_r)
+        det = PentacamIrisDetector()
+        geom = det.detect(img).geometry
+
+        assert geom.limbus_localized is True
+        assert geom.limbus_radius_px == pytest.approx(limbus_r, abs=15.0)
+
+    def test_search_floor_excludes_the_pupil_edge(self):
+        """The pupil edge at ~1.0x pr, and the 1.5x boundary, stay excluded."""
+        det = PentacamIrisDetector()
+        geom = det.detect(_flat_iris_scene(pupil_r=60.0, iris_r=300.0)).geometry
+        pr = geom.pupil_radius_px
+
+        assert geom.limbus_localized is False
+        assert geom.limbus_radius_px == pytest.approx(pr * 1.7)
+        assert geom.limbus_radius_px >= pr * 1.5
+
+    def test_limbus_genuinely_below_the_floor_is_refused(self):
+        """A limbus under the floor must be refused, never approximated.
+
+        With the old 2.0 floor this scene reported a confident, interior
+        maximum of 133px against a 95px ground truth.
+        """
+        img = create_synthetic_pentacam_image(pupil_r=60.0, limbus_r=95.0)
+        det = PentacamIrisDetector()
+        res = det.detect(img)
+
+        assert res.geometry.limbus_localized is False
+        assert res.valid is False
+        assert res.status == PentacamDetectionStatus.NO_LIMBUS
+        assert res.confidence == 0.0
+
+    def test_degenerate_search_window_returns_the_floor(self):
+        """No search runs, so the reported radius is the floor, not a measurement."""
+        det = PentacamIrisDetector()
+        geom = det.detect(_flat_iris_scene(size=300, pupil_r=95.0, iris_r=140.0)).geometry
+
+        assert geom.limbus_localized is False
+        assert geom.limbus_radius_px == pytest.approx(geom.pupil_radius_px * 1.7)
