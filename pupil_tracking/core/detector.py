@@ -82,6 +82,13 @@ from pupil_tracking.preprocessing.grayscale_handler import (
 
 logger = logging.getLogger(__name__)
 
+# Boundary-contrast evidence used to rank classical limbus candidates. The
+# scale is the fraction of the frame's grayscale spread that counts as a full
+# strength boundary; measured true limbi reach 0.21-0.52 while competing
+# spurious circles stay at 0.002-0.095.
+LIMBUS_CONTRAST_WEIGHT = 0.20
+LIMBUS_CONTRAST_SCALE = 0.20
+
 
 class UnifiedDetector:
     """Production detection pipeline with smart circle/ellipse fitting
@@ -1568,6 +1575,47 @@ class UnifiedDetector:
 
         return float(np.clip(base, 0.0, 1.0))
 
+    @staticmethod
+    def _boundary_contrast(blurred: np.ndarray, fit: FitResult) -> float:
+        """Strength of the grayscale transition across a fitted boundary.
+
+        Samples the blurred frame on rays around the fitted ellipse and takes
+        the median outside-minus-inside step, normalised by the frame's own
+        grayscale spread. The median keeps corneal reflections and lid
+        occlusions, which affect only a minority of rays, from dominating, and
+        normalising keeps the measure comparable across exposure. Polarity is
+        discarded because the limbus is darker than its surroundings in docked
+        frames and brighter in some pre-docked ones.
+        """
+        mean_radius = (fit.semi_major + fit.semi_minor) / 2.0
+        spread = float(np.percentile(blurred, 95) - np.percentile(blurred, 5))
+        if mean_radius <= 1.0 or spread <= 1.0:
+            return 0.0
+
+        angles = np.linspace(0.0, 2.0 * np.pi, 72, endpoint=False)
+        phi = math.radians(fit.angle_deg)
+        cos_phi, sin_phi = math.cos(phi), math.sin(phi)
+        major = fit.semi_major * np.cos(angles)
+        minor = fit.semi_minor * np.sin(angles)
+        offset_x = major * cos_phi - minor * sin_phi
+        offset_y = major * sin_phi + minor * cos_phi
+        h, w = blurred.shape
+
+        def band(offsets: tuple[float, ...]) -> np.ndarray:
+            total = np.zeros(len(angles))
+            for offset in offsets:
+                scale = (mean_radius + offset) / mean_radius
+                xs = np.clip(
+                    np.round(fit.center_x + offset_x * scale).astype(np.int32), 0, w - 1)
+                ys = np.clip(
+                    np.round(fit.center_y + offset_y * scale).astype(np.int32), 0, h - 1)
+                total += blurred[ys, xs]
+            return total / len(offsets)
+
+        step = band((5.0, 9.0)) - band((-9.0, -5.0))
+        strength = abs(float(np.median(step))) / spread
+        return float(min(1.0, strength / LIMBUS_CONTRAST_SCALE))
+
     # ================================================================
     # mm value attachment
     # ================================================================
@@ -2186,6 +2234,7 @@ class UnifiedDetector:
 
         best_fit: Optional[FitResult] = None
         best_score = 0.0
+        best_rank = -1.0
 
         # Vectorized radial edge search (72 rays at 5° increments, 21 radial offsets)
         angles = np.linspace(0, 2 * np.pi, 72, endpoint=False)
@@ -2257,7 +2306,15 @@ class UnifiedDetector:
                 )
                 score = score * 0.85 + ring_concentricity * 0.15
 
-            if score > best_score:
+            # Rank on the boundary transition strength as well. Circularity,
+            # coverage and fit quality are all near-saturated for concentric
+            # candidates, so a spurious internal edge can outscore the true
+            # limbus purely by fitting a tighter circle. Confidence stays on
+            # the unmodified score so quality grading and cross-validation
+            # keep their current thresholds.
+            rank = score + LIMBUS_CONTRAST_WEIGHT * self._boundary_contrast(blurred, fit)
+            if rank > best_rank:
+                best_rank = rank
                 best_score = score
                 best_fit = fit
 
