@@ -69,11 +69,15 @@ class PentacamReferenceExtractor:
     min_usable_fraction
         Minimum fraction of the iris annulus that must be non-occluded.
     min_polar_coverage
-        Minimum fraction of polar ribbon cells that must resample real pixels.
+        Minimum fraction of polar ribbon cells that must sample a real pixel.
+        Catches an annulus clipped by the image border.
     min_angular_coverage
         Minimum 1 - largest_gap/360 angular coverage of accepted features.
     min_features
-        Minimum number of accepted features for a usable reference.
+        Minimum number of accepted features for a usable reference.  Defaults to
+        the value :class:`~pupil_tracking.pentacam.detector.PentacamIrisDetector`
+        already uses for the same judgement, rather than a stricter invented
+        one.
     good_usable_fraction, good_polar_coverage, good_angular_coverage
         Thresholds above which a valid reference is graded ``GOOD`` rather than
         ``ACCEPTABLE``.
@@ -90,7 +94,7 @@ class PentacamReferenceExtractor:
         min_usable_fraction: float = 0.30,
         min_polar_coverage: float = 0.50,
         min_angular_coverage: float = 0.50,
-        min_features: int = 10,
+        min_features: int = 6,
         good_usable_fraction: float = 0.60,
         good_polar_coverage: float = 0.75,
         good_angular_coverage: float = 0.75,
@@ -155,6 +159,12 @@ class PentacamReferenceExtractor:
             return result
 
         # --- pupil / limbus geometry -------------------------------------- #
+        # Detection runs on the full supplied frame, exactly as
+        # PentacamIrisDetector is used elsewhere, so the established geometry
+        # contract and the b428614 localization rule are preserved verbatim.
+        # The detector's search window is scaled by the frame dimensions, so
+        # re-running it on a crop would change the measurements rather than
+        # merely restrict them.
         t = time.perf_counter()
         detection = self.detector.detect(gray)
         result.geometry = detection.geometry
@@ -288,9 +298,12 @@ class PentacamReferenceExtractor:
             )
 
         if not detection.valid:
+            # Geometry is sound, so the detector's own rejection is about
+            # landmark support rather than the image or the anatomy.
             return (
-                PentacamDetectionStatus.NO_IMAGE,
-                detection.failure_reason or "detector rejected the image",
+                PentacamDetectionStatus.INSUFFICIENT_FEATURES,
+                detection.failure_reason
+                or "detector found too few landmarks to support a reference",
             )
 
         return None
@@ -401,7 +414,14 @@ def _describe_bad_input(image: Optional[np.ndarray]) -> str:
 
 
 def _polar_coverage(polar: Any) -> float:
-    """Fraction of polar ribbon cells that sampled a real in-bounds pixel."""
+    """Fraction of polar ribbon cells that sampled a real in-bounds pixel.
+
+    This is *geometric* coverage: it falls when the annulus runs outside the
+    image (a limbus clipped by the frame, or a pupil too large for the crop).
+    It is deliberately independent of occlusion, which
+    ``IrisFeatureSet.usable_fraction`` measures.  Between them, a clipped
+    annulus and an occluded one are distinguishable.
+    """
     if polar is None or polar.mask is None or polar.mask.size == 0:
         return 0.0
     return float(np.count_nonzero(polar.mask)) / float(polar.mask.size)
