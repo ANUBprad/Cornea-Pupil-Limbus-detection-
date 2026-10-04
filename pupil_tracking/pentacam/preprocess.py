@@ -49,6 +49,27 @@ def to_gray(image: np.ndarray) -> np.ndarray:
     raise ValueError(f"unsupported image shape: {image.shape}")
 
 
+def to_bgr(image: np.ndarray) -> np.ndarray:
+    """Return a canonical 3-channel BGR view of ``image``.
+
+    Colour-aware stages (iris masking reads the blue channel to suppress
+    printed docking-ring marks) need exactly three channels, while geometry
+    stages prefer two.  Normalising here keeps every downstream stage on the
+    channel layout it actually supports, including single-channel ``(H, W, 1)``
+    arrays that OpenCV's converters reject.
+    """
+    if image.ndim == 2:
+        return cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+    channels = image.shape[2]
+    if channels == 3:
+        return image
+    if channels == 4:
+        return cv2.cvtColor(image, cv2.COLOR_BGRA2BGR)
+    if channels == 1:
+        return cv2.cvtColor(image[:, :, 0], cv2.COLOR_GRAY2BGR)
+    raise ValueError(f"unsupported image shape: {image.shape}")
+
+
 def build_ui_mask(gray: np.ndarray) -> np.ndarray:
     """Create a mask where valid ocular image is 255 and UI chrome/text is 0.
 

@@ -10,11 +10,13 @@ No existing production code is modified by this module.
 from pupil_tracking.pentacam.types import (
     PentacamDetectionResult,
     PentacamDetectionStatus,
+    PentacamEyeROI,
     PentacamFeature,
     PentacamFeatureSet,
     PentacamGeometry,
     PentacamImageType,
     PentacamQuality,
+    PentacamReferenceResult,
 )
 from pupil_tracking.pentacam.cross_system import (
     CrossSystemRegistrationInput,
@@ -23,20 +25,24 @@ from pupil_tracking.pentacam.cross_system import (
     TransformationModel,
 )
 from pupil_tracking.pentacam.detector import PentacamIrisDetector
+from pupil_tracking.pentacam.reference import PentacamReferenceExtractor
 from pupil_tracking.pentacam.cross_registration import CrossModalityRegistrationEngine
 
 __all__ = [
     "PentacamDetectionResult",
     "PentacamDetectionStatus",
+    "PentacamEyeROI",
     "PentacamFeature",
     "PentacamFeatureSet",
     "PentacamGeometry",
     "PentacamImageType",
     "PentacamQuality",
+    "PentacamReferenceResult",
     "CrossSystemRegistrationInput",
     "CrossSystemRegistrationResult",
     "RegistrationFailureKind",
     "TransformationModel",
     "PentacamIrisDetector",
+    "PentacamReferenceExtractor",
     "CrossModalityRegistrationEngine",
 ]
