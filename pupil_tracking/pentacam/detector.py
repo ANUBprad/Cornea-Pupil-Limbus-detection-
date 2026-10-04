@@ -25,6 +25,7 @@ from typing import Dict, List, Optional, Tuple
 import cv2
 import numpy as np
 
+from pupil_tracking.pentacam.preprocess import build_ui_mask
 from pupil_tracking.pentacam.types import (
     PentacamDetectionResult,
     PentacamDetectionStatus,
@@ -192,42 +193,10 @@ class PentacamIrisDetector:
     def _build_ui_mask(self, gray: np.ndarray) -> np.ndarray:
         """Create a mask where valid ocular image is 255 and UI chrome/text is 0.
 
-        Detects and suppresses:
-            - Sharp horizontal/vertical UI line overlays and crosshairs
-            - Bright annotation text (characters, numbers)
-            - Pure black letterboxing/chrome margins
+        Thin wrapper over the shared :func:`pupil_tracking.pentacam.preprocess.build_ui_mask`
+        so the detector and the reference pipeline use one implementation.
         """
-        h, w = gray.shape[:2]
-        usable = np.ones((h, w), dtype=np.uint8) * 255
-
-        # Pure black border/chrome margin
-        black_thresh = 5
-        usable[gray <= black_thresh] = 0
-
-        # Highly saturated synthetic pure white text / graphics (e.g. > 252)
-        white_thresh = 252
-        white_pixels = gray >= white_thresh
-        if np.any(white_pixels):
-            # Dilate text/lines to eliminate anti-aliased feather edges
-            kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-            dilated_white = cv2.dilate(white_pixels.astype(np.uint8), kernel)
-            usable[dilated_white > 0] = 0
-
-        # Detect horizontal and vertical crosshair / reticle lines
-        # Using morphological opening with thin long kernels
-        h_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 1))
-        v_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 25))
-
-        edges = cv2.Canny(gray, 100, 200)
-        h_lines = cv2.morphologyEx(edges, cv2.MORPH_OPEN, h_kernel)
-        v_lines = cv2.morphologyEx(edges, cv2.MORPH_OPEN, v_kernel)
-
-        lines_mask = cv2.bitwise_or(h_lines, v_lines)
-        if np.any(lines_mask):
-            lines_dilated = cv2.dilate(lines_mask, cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5)))
-            usable[lines_dilated > 0] = 0
-
-        return usable
+        return build_ui_mask(gray)
 
     def _localize_geometry(
         self,
