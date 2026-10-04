@@ -1,0 +1,25 @@
+# Runtime dependency set for the Docker image (see docs/DOCKER.md).
+#
+# Deliberately smaller than requirements.txt. The production backend is ONNX
+# Runtime, and pupil_tracking/ml/inference.py imports torch lazily
+# ("PyTorch is optional in production - we prefer ONNX Runtime"), so the
+# detection pipeline runs without torch. Training (torch, torchvision,
+# segmentation-models-pytorch, albumentations, scipy) stays a native-only
+# workflow and is not part of this image.
+#
+# OpenCV is the headless wheel on purpose: the GUI build additionally requires
+# libGL, which drags in ~200 MB of Mesa/LLVM drivers that this image cannot use.
+# The trade-off is that the display helpers (cv2.imshow, cv2.waitKey,
+# cv2.namedWindow) are not compiled in, so the GUI, camera and interactive image
+# modes cannot show a window here. Everything else -- decoding, inference,
+# VideoCapture/VideoWriter, and the whole test suite -- is unaffected.
+#
+# Versions are pinned to the native Windows / Python 3.12 baseline that the
+# test suite was verified against.
+
+numpy==2.2.6
+opencv-python-headless==4.11.0.86
+onnxruntime==1.24.3
+
+# Test-only, so the pytest suite can run inside the image.
+pytest==9.1.1

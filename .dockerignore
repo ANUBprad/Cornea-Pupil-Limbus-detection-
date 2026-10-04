@@ -1,0 +1,69 @@
+# Keep the build context free of clinical data, model weights, secrets and
+# generated artifacts. The Dockerfile copies only launch_gui.py and
+# pupil_tracking/, so most of these entries protect the context (and any future
+# broad `COPY`) rather than the current image.
+
+# Version control and CI
+.git
+.gitignore
+.github
+
+# Clinical data: tracked in git, but patient imagery must never be baked into
+# an image. Mount it read-only if a workflow needs it.
+clinical_data/
+
+# Model weights (git-ignored binaries, ~25-100 MB each)
+*.pth
+*.pt
+*.onnx
+*.onnx.data
+*.h5
+models/**
+
+# Runtime output and phase artifacts
+logs/
+*.log
+audit_*.jsonl
+output/
+diagnostic_output/
+snapshot_*.png
+_phase_artifacts/
+build/
+dist/
+*.egg-info/
+
+# Caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+ENV/
+
+# Editors and OS files
+.vscode/
+.idea/
+.vs/
+*.swp
+.DS_Store
+
+# Tooling that is not part of the runtime image. `scripts/` is kept in the
+# context because pupil_tracking/tests/test_corrected_output.py imports
+# annotate_live_video from it; only the Docker `test` target copies it in.
+annotation_tool/
+docs/
+csharp/
+*.ipynb
+train_production.py
+gen_notebook.py
+build_app.bat
+inspect_inference.py
+inspect_ring_detector.py
+
+# Generated output that is committed under scripts/
+scripts/phase18_output/
+scripts/phase2_benchmark_output/
+scripts/test_reports/

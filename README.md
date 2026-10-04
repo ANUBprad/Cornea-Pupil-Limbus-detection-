@@ -32,19 +32,20 @@ https://github.com/user-attachments/assets/135ec84c-2733-41a3-b81c-079041c7823a
 2. [Why the hybrid design](#why-the-hybrid-design)
 3. [Requirements](#requirements)
 4. [Installation](#installation)
-5. [Quick start](#quick-start)
-6. [The GUI](#the-gui)
-7. [Command-line reference](#command-line-reference)
-8. [How detection works](#how-detection-works)
-9. [Outputs & result schema](#outputs--result-schema)
-10. [Training your own model](#training-your-own-model)
-11. [Exporting to ONNX](#exporting-to-onnx)
-12. [Annotation workflow](#annotation-workflow)
-13. [Project structure](#project-structure)
-14. [Configuration](#configuration)
-15. [Testing](#testing)
-16. [Troubleshooting](#troubleshooting)
-17. [Known limitations](#known-limitations)
+5. [Docker](#docker)
+6. [Quick start](#quick-start)
+7. [The GUI](#the-gui)
+8. [Command-line reference](#command-line-reference)
+9. [How detection works](#how-detection-works)
+10. [Outputs & result schema](#outputs--result-schema)
+11. [Training your own model](#training-your-own-model)
+12. [Exporting to ONNX](#exporting-to-onnx)
+13. [Annotation workflow](#annotation-workflow)
+14. [Project structure](#project-structure)
+15. [Configuration](#configuration)
+16. [Testing](#testing)
+17. [Troubleshooting](#troubleshooting)
+18. [Known limitations](#known-limitations)
 
 ---
 
@@ -130,6 +131,30 @@ Place model weights under `models/` (they are git-ignored):
 `models/best_model.pth` for PyTorch, and/or `models/onnx/segmentation.onnx`
 (+ `segmentation_quantized.onnx`) for ONNX. If no model is present, the app still
 launches but returns empty detections.
+
+---
+
+## Docker
+
+A reproducible container is provided for the non-interactive paths (`video` mode
+and the pytest suite):
+
+```bash
+docker build -t pupil-limbus-detector .
+
+docker run --rm \
+  -v "$PWD/models:/app/models:ro" \
+  -v "$PWD/data:/data:ro" \
+  -v "$PWD/out:/out" \
+  pupil-limbus-detector video -i /data/clip.mp4 -o /out/clip_tracked.mp4
+```
+
+The image runs as a non-root user, ships no model weights or clinical data, and
+falls back to the classical CV pipeline when no model is mounted. The Tkinter
+GUI, live-camera mode, the interactive `image` overlay window, and model
+training are native-only — this is a desktop application first. Scope, the
+`--target test` image, verified results and limitations are documented in
+[`docs/DOCKER.md`](docs/DOCKER.md).
 
 ---
 
@@ -440,6 +465,10 @@ gen_notebook.py            Generates train_colab.ipynb
 build_app.bat              PyInstaller build (Windows)
 requirements.txt           Dependencies
 manual_ring_priors.json    Runtime cache of learned manual-ring priors
+Dockerfile                 Headless runtime image (+ `test` target)
+.dockerignore              Keeps clinical data and weights out of the context
+docker/                    Container-only dependency pins
+docs/DOCKER.md             Container usage, scope and limitations
 
 pupil_tracking/            Main package
 ├── core/                  Detection engine (UnifiedDetector, SmartContourFitter,
