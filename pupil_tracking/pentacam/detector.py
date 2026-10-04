@@ -120,6 +120,21 @@ class PentacamIrisDetector:
         else:
             geom = geometry
 
+        if not geom.limbus_localized:
+            return PentacamDetectionResult(
+                valid=False,
+                status=PentacamDetectionStatus.NO_LIMBUS,
+                geometry=geom,
+                image_width=w,
+                image_height=h,
+                failure_reason=(
+                    f"Limbus search pinned to a window bound "
+                    f"(r={geom.limbus_radius_px:.1f}px); no iris-to-sclera "
+                    "transition was bracketed"
+                ),
+                processing_time_ms=(time.perf_counter() - t0) * 1000.0,
+            )
+
         # 3. Extract iris annulus mask
         annulus_mask = self._build_annulus_mask(gray.shape, geom, ui_mask)
 
@@ -300,6 +315,11 @@ class PentacamIrisDetector:
         min_limbus_r = pr * 2.0
         max_limbus_r = min(pr * 3.8, min(pcx, w - pcx, pcy, h - pcy) * 0.95)
 
+        # The limbus is only localized when the steepest iris-to-sclera brightening
+        # lands strictly inside the search window.  On either edge the reported
+        # radius is an artifact of the window bounds, not a measured transition.
+        limbus_localized = False
+
         if min_limbus_r >= max_limbus_r:
             limbus_r = min_limbus_r
         else:
@@ -320,6 +340,7 @@ class PentacamIrisDetector:
             diffs = np.gradient(radial_grads)
             best_r_idx = int(np.argmax(diffs))
             limbus_r = float(r_samples[best_r_idx])
+            limbus_localized = 0 < best_r_idx < len(r_samples) - 1
 
         best_limbus = EllipseParams(
             center_x=float(pcx),
@@ -335,6 +356,7 @@ class PentacamIrisDetector:
             limbus=best_limbus,
             pupil_detected=True,
             limbus_detected=True,
+            limbus_localized=limbus_localized,
             pupil_radius_px=float(best_pupil.radius),
             limbus_radius_px=float(best_limbus.radius),
             pupil_limbus_ratio=float(best_pupil.radius / max(best_limbus.radius, 1e-6)),

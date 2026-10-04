@@ -58,6 +58,12 @@ class PentacamGeometry:
     pupil_detected: bool = False
     limbus_detected: bool = False
 
+    # False when the radial limbus search could not bracket an iris-to-sclera
+    # transition, meaning limbus_radius_px is pinned to a search-window bound
+    # instead of a measured limbus.  Defaults True so externally supplied
+    # geometry keeps its previous behaviour.
+    limbus_localized: bool = True
+
     pupil_radius_px: float = 0.0
     limbus_radius_px: float = 0.0
     pupil_limbus_ratio: float = 0.0
@@ -66,6 +72,7 @@ class PentacamGeometry:
         d: Dict[str, Any] = {
             "pupil_detected": self.pupil_detected,
             "limbus_detected": self.limbus_detected,
+            "limbus_localized": self.limbus_localized,
             "pupil_radius_px": round(self.pupil_radius_px, 2),
             "limbus_radius_px": round(self.limbus_radius_px, 2),
             "pupil_limbus_ratio": round(self.pupil_limbus_ratio, 4),

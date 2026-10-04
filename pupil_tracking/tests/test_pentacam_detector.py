@@ -163,3 +163,112 @@ class TestPentacamIrisDetector:
         res = det.detect(empty)
         assert res.valid is False
         assert res.status == PentacamDetectionStatus.NO_IMAGE
+
+
+def _flat_iris_scene(
+    size: int = 512,
+    pupil_r: float = 60.0,
+    iris_r: float = 300.0,
+    iris_val: int = 105,
+    sclera_val: int = 200,
+) -> np.ndarray:
+    """Noise-free concentric scene: dark pupil, flat iris, bright sclera.
+
+    Growing ``iris_r`` past the detector's limbus search window removes every
+    iris-to-sclera transition from that window, leaving a flat radial profile.
+    That is the unbracketed-search case the fallback must report honestly.
+    """
+    img = np.full((size, size), sclera_val, dtype=np.uint8)
+    c = size // 2
+    cv2_circle(img, (c, c), int(iris_r), iris_val)
+    cv2_circle(img, (c, c), int(pupil_r), 15)
+    return img
+
+
+class TestPentacamLimbusFallback:
+    """A limbus radius pinned to a search-window bound is not a localization."""
+
+    def test_unbracketed_search_is_not_valid(self):
+        det = PentacamIrisDetector()
+        res = det.detect(_flat_iris_scene(pupil_r=60.0, iris_r=300.0))
+
+        assert res.geometry.limbus_localized is False
+        assert res.valid is False
+        assert res.status == PentacamDetectionStatus.NO_LIMBUS
+        assert res.quality != PentacamQuality.GOOD
+        assert res.confidence == 0.0
+        assert res.feature_set.features == []
+        assert "window bound" in res.failure_reason
+
+    def test_unbracketed_search_radius_is_pinned_to_lower_bound(self):
+        det = PentacamIrisDetector()
+        geom = det.detect(_flat_iris_scene(pupil_r=60.0, iris_r=300.0)).geometry
+
+        assert geom.pupil_detected is True
+        assert geom.limbus_detected is True
+        assert geom.limbus_radius_px == pytest.approx(geom.pupil_radius_px * 2.0)
+
+    def test_degenerate_search_window_is_not_valid(self):
+        """min_limbus_r >= max_limbus_r means no search runs at all."""
+        det = PentacamIrisDetector()
+        res = det.detect(_flat_iris_scene(size=300, pupil_r=95.0, iris_r=140.0))
+
+        assert res.geometry.pupil_detected is True
+        assert res.geometry.limbus_localized is False
+        assert res.valid is False
+        assert res.status == PentacamDetectionStatus.NO_LIMBUS
+        assert res.quality != PentacamQuality.GOOD
+        assert res.confidence == 0.0
+
+    def test_genuine_transition_still_accepted(self):
+        det = PentacamIrisDetector()
+        res = det.detect(create_synthetic_pentacam_image(with_ui=True))
+
+        assert res.geometry.limbus_localized is True
+        assert res.valid is True
+        assert res.status == PentacamDetectionStatus.OK
+        assert res.geometry.limbus_radius_px == pytest.approx(160.0, abs=15.0)
+
+    def test_external_geometry_defaults_to_localized(self):
+        det = PentacamIrisDetector()
+        img = create_synthetic_pentacam_image(with_ui=True)
+        geom = PentacamGeometry(
+            pupil=EllipseParams(center_x=256.0, center_y=256.0,
+                                semi_major=60.0, semi_minor=60.0),
+            limbus=EllipseParams(center_x=256.0, center_y=256.0,
+                                 semi_major=160.0, semi_minor=160.0),
+            pupil_detected=True,
+            limbus_detected=True,
+            pupil_radius_px=60.0,
+            limbus_radius_px=160.0,
+        )
+
+        assert geom.limbus_localized is True
+        assert det.detect(img, geometry=geom).valid is True
+
+    def test_unlocalized_external_geometry_rejected(self):
+        det = PentacamIrisDetector()
+        img = create_synthetic_pentacam_image(with_ui=True)
+        geom = PentacamGeometry(
+            pupil=EllipseParams(center_x=256.0, center_y=256.0,
+                                semi_major=60.0, semi_minor=60.0),
+            limbus=EllipseParams(center_x=256.0, center_y=256.0,
+                                 semi_major=120.0, semi_minor=120.0),
+            pupil_detected=True,
+            limbus_detected=True,
+            limbus_localized=False,
+            pupil_radius_px=60.0,
+            limbus_radius_px=120.0,
+        )
+
+        res = det.detect(img, geometry=geom)
+        assert res.valid is False
+        assert res.status == PentacamDetectionStatus.NO_LIMBUS
+
+    def test_to_dict_exposes_limbus_localized(self):
+        det = PentacamIrisDetector()
+        d = det.detect(_flat_iris_scene(pupil_r=60.0, iris_r=300.0)).to_dict()
+
+        assert d["geometry"]["limbus_localized"] is False
+        assert d["status"] == PentacamDetectionStatus.NO_LIMBUS.value
+        assert d["valid"] is False
