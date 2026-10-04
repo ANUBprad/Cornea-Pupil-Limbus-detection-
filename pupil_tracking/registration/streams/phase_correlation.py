@@ -41,6 +41,10 @@ class PhaseCorrelationStream(BaseStream):
 
     The confidence is derived from the peak-to-sidelobe ratio (PSR)
     and the percentage of valid pixels in both polar images.
+
+    A peak that is weak (low PSR) or tied with a rival peak (low peak
+    separation) is rejected rather than returned, because argmax over a
+    near-flat correlation surface yields an arbitrary angle.
     """
 
     def __init__(self):
@@ -49,6 +53,8 @@ class PhaseCorrelationStream(BaseStream):
         self.unwrapper = PolarUnwrapper()
         self.enhancer = IrisEnhancer()
         self.upsample_factor = cfg.poc_upsample_factor
+        self.min_psr = cfg.poc_min_psr
+        self.min_peak_separation = cfg.poc_min_peak_separation
 
     def compute(
         self,
@@ -102,9 +108,26 @@ class PhaseCorrelationStream(BaseStream):
         profile_curr = profile_curr * valid_mask
 
         # 1-D phase correlation
-        shift_deg, psr, peak_val = self._phase_correlate_1d(
+        shift_deg, psr, peak_val, separation = self._phase_correlate_1d(
             profile_ref, profile_curr, polar_ref.num_angles
         )
+
+        # Reject unreliable peaks instead of returning an arbitrary angle.
+        # A weak PSR means no dominant peak; a small separation means the
+        # winner is tied with a rival, so argmax is a coin flip. Both happen
+        # when the two polar images cover different physical iris radii, i.e.
+        # when the pupil/limbus geometry disagrees between ref and curr.
+        if psr < self.min_psr or separation < self.min_peak_separation:
+            return self._make_result(
+                metadata={
+                    "error": "unreliable_peak",
+                    "psr": float(psr),
+                    "peak_value": float(peak_val),
+                    "peak_separation": float(separation),
+                    "valid_fraction": float(valid_frac),
+                    "rejected_shift_deg": float(shift_deg),
+                }
+            )
 
         # Confidence from PSR and valid fraction
         confidence = self._compute_confidence(psr, valid_frac, peak_val)
@@ -115,6 +138,7 @@ class PhaseCorrelationStream(BaseStream):
             metadata={
                 "psr": float(psr),
                 "peak_value": float(peak_val),
+                "peak_separation": float(separation),
                 "valid_fraction": float(valid_frac),
                 "num_angles": polar_ref.num_angles,
             },
@@ -136,6 +160,9 @@ class PhaseCorrelationStream(BaseStream):
             Peak-to-sidelobe ratio.
         peak_val : float
             Peak correlation value.
+        separation : float
+            Relative gap between the winning peak and the best peak outside
+            its lobe. Near zero means the winner is tied with a rival.
         """
         n = len(signal_ref)
 
@@ -184,7 +211,37 @@ class PhaseCorrelationStream(BaseStream):
         sidelobe_std = np.std(sidelobes) + 1e-10
         psr = (peak_val - sidelobe_mean) / sidelobe_std
 
-        return float(shift_deg), float(psr), float(peak_val)
+        # Peak separation: the winning peak must stand clear of the best rival
+        # peak, ignoring the winning lobe itself. A tiny gap means two peaks are
+        # effectively tied and the argmax index is not meaningful.
+        separation = self._peak_separation(correlation, int(peak_idx))
+
+        return float(shift_deg), float(psr), float(peak_val), float(separation)
+
+    @staticmethod
+    def _peak_separation(correlation: np.ndarray, peak_idx: int, exclude: int = 5) -> float:
+        """Relative gap between the winning correlation peak and the best rival.
+
+        Parameters
+        ----------
+        correlation : np.ndarray
+            1-D correlation surface from the inverse FFT.
+        peak_idx : int
+            Index of the winning peak.
+        exclude : int
+            Samples either side of the peak treated as part of its own lobe.
+        """
+        n = len(correlation)
+        if n == 0 or abs(float(correlation[peak_idx])) < 1e-12:
+            return 0.0
+
+        circular_distance = np.abs((np.arange(n) - peak_idx + n // 2) % n - n // 2)
+        rivals = correlation[circular_distance > exclude]
+        if rivals.size == 0:
+            return 0.0
+
+        top1 = float(correlation[peak_idx])
+        return float((top1 - float(np.max(rivals))) / abs(top1))
 
     @staticmethod
     def _compute_confidence(psr: float, valid_frac: float, peak_val: float) -> float:

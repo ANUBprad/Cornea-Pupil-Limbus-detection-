@@ -21,6 +21,7 @@ import sys
 from pathlib import Path
 
 import cv2
+import numpy as np
 import pytest
 
 _THIS_DIR = Path(__file__).resolve().parent
@@ -31,6 +32,9 @@ if str(_PROJECT_ROOT) not in sys.path:
 from pupil_tracking.core.detector import UnifiedDetector  # noqa: E402
 from pupil_tracking.iris.paired import PairConfig, make_synthetic_pair  # noqa: E402
 from pupil_tracking.registration.engine import RegistrationEngine  # noqa: E402
+from pupil_tracking.registration.streams.phase_correlation import (  # noqa: E402
+    PhaseCorrelationStream,
+)
 
 # Clinical images that yield a usable pupil *and* limbus ellipse under the
 # classical (ML-free) fallback path.
@@ -88,3 +92,61 @@ def test_known_rotation_reported_with_same_sign(
             f"{image_name}: applied {angle_deg:+.1f} deg but reported "
             f"{result.torsion_deg:+.3f} deg (sign inverted)"
         )
+
+    # Magnitude, not just direction: a right-signed but wildly wrong angle is
+    # still a failure. Measured worst case across these images is 0.76 deg.
+    assert abs(result.torsion_deg - angle_deg) < 1.5, (
+        f"{image_name}: applied {angle_deg:+.1f} deg but reported "
+        f"{result.torsion_deg:+.3f} deg (magnitude off by "
+        f"{abs(result.torsion_deg - angle_deg):.2f} deg)"
+    )
+
+
+def test_eye_01_rejects_unreliable_phase_correlation_peak(detector):
+    """Phase correlation must abstain instead of emitting a bogus shift.
+
+    Under the classical fallback detector the rotated eye_01 limbus collapses
+    (207.5 -> 165.5 px), so the two polar images cover different physical iris
+    radii. The correlation surface then has no dominant peak and argmax lands
+    on an arbitrary angle (observed: +110 deg for a true -3 deg rotation).
+
+    The stream must reject that peak rather than report it.
+    """
+    img = cv2.imread(str(_CLEAN_DIR / "eye_01.jpeg"))
+    assert img is not None, "missing clinical image eye_01"
+
+    ref = detector.detect(img)
+    limbus = _ellipse(ref, "limbus")
+    assert limbus is not None, "eye_01: no limbus ellipse"
+
+    pair = make_synthetic_pair(
+        img,
+        PairConfig(rotation_deg=-3.0, center=(limbus.center_x, limbus.center_y)),
+    )
+    cur = detector.detect(pair.image_b)
+
+    result = PhaseCorrelationStream().compute(img, pair.image_b, ref, cur)
+    metadata = result.metadata or {}
+
+    assert not result.valid, (
+        "phase correlation accepted an unreliable peak and reported "
+        f"{result.torsion_deg} deg for a true -3.0 deg rotation"
+    )
+    assert result.torsion_deg is None, (
+        f"rejected result must not carry a shift, got {result.torsion_deg}"
+    )
+    assert metadata.get("error") == "unreliable_peak"
+    # The diagnostics must survive so the rejection is explainable.
+    assert "psr" in metadata and "peak_separation" in metadata
+
+
+def test_peak_separation_detects_tied_peaks():
+    """Separation is ~1 for a lone peak and ~0 when two peaks are tied."""
+    lone = np.zeros(360)
+    lone[100] = 1.0
+    assert PhaseCorrelationStream._peak_separation(lone, 100) > 0.9
+
+    tied = np.zeros(360)
+    tied[100] = 1.0
+    tied[220] = 1.0
+    assert PhaseCorrelationStream._peak_separation(tied, 100) < 0.1

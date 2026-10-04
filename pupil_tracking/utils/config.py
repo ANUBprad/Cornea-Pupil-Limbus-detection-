@@ -753,6 +753,13 @@ class RegistrationConfig:
         Minimum number of valid streams for a fused result.
     poc_upsample_factor : int
         Sub-pixel upsample factor for phase correlation.
+    poc_min_psr : float
+        Minimum peak-to-sidelobe ratio for a phase-correlation peak to be
+        trusted. Below this the correlation surface has no dominant peak.
+    poc_min_peak_separation : float
+        Minimum relative gap between the winning phase-correlation peak and
+        the best peak outside its lobe. Below this, argmax is a coin flip
+        between tied peaks.
     deep_matcher_max_keypoints : int
         Maximum keypoints for the deep matcher stream.
     ink_min_markers : int
@@ -781,7 +788,12 @@ class RegistrationConfig:
     # Stream enables
     enable_phase_correlation: bool = True
     enable_deep_matcher: bool = True
-    enable_ink_tracker: bool = True
+    # Off by default: detect_limbal_purple_markers reports ~20 spurious "markers"
+    # on clinical eyes carrying no surgical ink (iris/pupil texture crosses the
+    # purple hue threshold). Those false pairs outvote the real streams and, on
+    # eye_01, flipped the fused torsion sign. Enable only once marker detection
+    # is shown to be specific on ink-free eyes.
+    enable_ink_tracker: bool = False
     enable_vessel_tracker: bool = True
     enable_custom_feature: bool = True
     enable_iris_features: bool = True
@@ -796,6 +808,8 @@ class RegistrationConfig:
 
     # Stream-specific parameters
     poc_upsample_factor: int = 100
+    poc_min_psr: float = 5.0
+    poc_min_peak_separation: float = 0.30
 
     deep_matcher_max_keypoints: int = 500
 

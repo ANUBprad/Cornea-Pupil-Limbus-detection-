@@ -205,5 +205,8 @@ class TestIndependentComponentToggles:
 
         assert cfg.registration.enabled is True
         assert cfg.registration.enable_iris_features is True
-        assert cfg.registration.enable_ink_tracker is True
         assert cfg.registration.enable_phase_correlation is True
+        # Off until purple-marker detection is shown to be specific on eyes
+        # with no surgical ink; it currently reports ~20 false markers and
+        # corrupts fused torsion (see RegistrationConfig.enable_ink_tracker).
+        assert cfg.registration.enable_ink_tracker is False

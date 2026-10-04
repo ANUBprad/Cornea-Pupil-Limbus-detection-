@@ -76,6 +76,26 @@ def test_ink_tracker_stream_empty():
     assert res.inlier_count == 0
 
 
+def test_ink_tracker_match_markers_by_angle():
+    """_match_markers pairs each ref marker with its nearest curr marker.
+
+    Regression guard: this method was stranded inside a module-level function
+    after a dedent, so it did not exist on the class and every non-empty ink
+    detection raised AttributeError. The empty-image test above returns before
+    reaching it, so this direct call is what keeps the method reachable.
+    """
+    stream = InkTrackerStream()
+    angles_ref = np.array([0.0, np.pi / 2])
+    angles_curr = np.array([np.radians(5.0), np.pi / 2 + np.radians(5.0)])
+
+    matches = stream._match_markers(angles_ref, angles_curr)
+    assert matches == [(0, 0), (1, 1)]
+
+    # A curr marker with no ref partner inside the 30-degree window is dropped.
+    unmatched = stream._match_markers(np.array([0.0]), np.array([np.pi]))
+    assert unmatched == []
+
+
 def test_vessel_tracker_stream():
     stream = VesselTrackerStream()
     assert stream.name == StreamName.LIMBAL_VESSELS
