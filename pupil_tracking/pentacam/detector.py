@@ -392,7 +392,15 @@ class PentacamIrisDetector:
         geom: PentacamGeometry,
         annulus_mask: np.ndarray,
     ) -> Tuple[List[PentacamFeature], Dict]:
-        """Detect distinctive iris landmarks on a polar lattice and classify them."""
+        """Detect distinctive iris landmarks on a polar lattice and classify them.
+
+        The whole ``(num_angles x num_radii)`` lattice is evaluated with array
+        operations rather than a per-candidate Python loop: patches, texture
+        statistics and the 16-bin orientation descriptors are all gathered and
+        reduced in a handful of vectorized passes. Semantics are identical to
+        the former scalar loop (including candidate ordering and the
+        ``num_candidates`` count, which includes every lattice point).
+        """
         h, w = gray.shape[:2]
         pe = geom.pupil
         le = geom.limbus
@@ -425,80 +433,95 @@ class PentacamIrisDetector:
         p90 = float(np.percentile(iris_pixels, 90))
         iris_contrast_span = max(p90 - p10, 10.0)
 
-        accepted_features: List[PentacamFeature] = []
-        num_candidates = 0
-
         angles_deg = np.linspace(0.0, 360.0, self.num_angles, endpoint=False)
         rad_norms = np.linspace(0.15, 0.85, self.num_radii)
+        num_candidates = int(angles_deg.size) * int(rad_norms.size)
 
-        for a_deg in angles_deg:
-            a_rad = math.radians(a_deg)
-            cos_a = math.cos(a_rad)
-            sin_a = math.sin(a_rad)
+        # Limbus and pupil radius (constant across the lattice)
+        r_pupil = pe.radius
+        r_limbus = le.radius
 
-            # Limbus and pupil radius at this angle
-            r_pupil = pe.radius
-            r_limbus = le.radius
+        # Lattice coordinates, angle-major then radial (matches original order).
+        aa = angles_deg[:, None]
+        rr = rad_norms[None, :]
+        r_px = r_pupil + rr * (r_limbus - r_pupil)
+        cx = pcx + rr * (lcx - pcx)
+        cy = pcy + rr * (lcy - pcy)
+        a_rad = np.deg2rad(aa)
+        fx = cx + r_px * np.cos(a_rad)
+        fy = cy + r_px * np.sin(a_rad)
 
-            for r_norm in rad_norms:
-                num_candidates += 1
+        ix = np.rint(fx).astype(np.int32)
+        iy = np.rint(fy).astype(np.int32)
 
-                # Radial coordinate interpolation
-                r_px = r_pupil + r_norm * (r_limbus - r_pupil)
-                # Center shifts linearly from pupil to limbus center
-                cx = pcx + r_norm * (lcx - pcx)
-                cy = pcy + r_norm * (lcy - pcy)
+        # Valid candidates: inside image, inside annulus, patch fully in bounds.
+        half_patch = 3
+        inb = (ix >= 0) & (ix < w) & (iy >= 0) & (iy < h)
+        ok = inb & (annulus_mask[np.clip(iy, 0, h - 1), np.clip(ix, 0, w - 1)] > 0)
+        ok &= (
+            (ix >= half_patch) & (ix < w - half_patch)
+            & (iy >= half_patch) & (iy < h - half_patch)
+        )
 
-                fx = cx + r_px * cos_a
-                fy = cy + r_px * sin_a
+        if not np.any(ok):
+            metrics = self._compute_coverage_metrics([])
+            metrics["num_candidates"] = num_candidates
+            return [], metrics
 
-                ix = int(round(fx))
-                iy = int(round(fy))
+        sel_a, sel_r = np.nonzero(ok)
+        sfx = fx[sel_a, sel_r].ravel()
+        sfy = fy[sel_a, sel_r].ravel()
+        six = ix[sel_a, sel_r].ravel()
+        siy = iy[sel_a, sel_r].ravel()
+        n = int(six.size)
 
-                if not (0 <= ix < w and 0 <= iy < h):
-                    continue
+        # Gather every 7x7 patch in a single fancy-index operation -> (n, 7, 7)
+        offs = np.arange(-half_patch, half_patch + 1)
+        py = siy[:, None] + offs[None, :]
+        px = six[:, None] + offs[None, :]
+        patches = enhanced[py[:, :, None], px[:, None, :]]
+        lap_patches = abs_lap[py[:, :, None], px[:, None, :]]
+        mag_patches = mag_full[py[:, :, None], px[:, None, :]]
+        ori_patches = ori_full[py[:, :, None], px[:, None, :]]
 
-                if annulus_mask[iy, ix] == 0:
-                    continue
+        mean_lap = lap_patches.mean(axis=(1, 2))
+        local_std = patches.std(axis=(1, 2))
 
-                # Local patch analysis (7x7)
-                half_patch = 3
-                if not (half_patch <= ix < w - half_patch and half_patch <= iy < h - half_patch):
-                    continue
+        keep = (mean_lap >= self.min_contrast) & (local_std >= (self.min_contrast * 0.7))
 
-                patch = enhanced[iy - half_patch:iy + half_patch + 1, ix - half_patch:ix + half_patch + 1]
-                patch_lap = abs_lap[iy - half_patch:iy + half_patch + 1, ix - half_patch:ix + half_patch + 1]
+        # 16-bin normalized gradient orientation descriptor (contrast-invariant).
+        # Bin width is fixed at 360/16 = 22.5 deg, so indices are computed
+        # arithmetically and accumulated with one bincount instead of 576
+        # np.histogram calls (each of which rebuilt identical bin edges).
+        bins = np.floor(ori_patches / 22.5).astype(np.int32)
+        np.clip(bins, 0, 15, out=bins)
+        rows = np.arange(n, dtype=np.int64)[:, None, None]
+        hist = np.bincount(
+            (rows * 16 + bins).ravel(),
+            weights=mag_patches.ravel(),
+            minlength=n * 16,
+        ).reshape(n, 16)
+        hist_norm = hist / (np.linalg.norm(hist, axis=1, keepdims=True) + 1e-7)
 
-                mean_lap = float(np.mean(patch_lap))
-                local_std = float(np.std(patch))
+        confidence = np.clip(
+            (mean_lap / 20.0) * 0.5 + (local_std / iris_contrast_span) * 0.5,
+            0.1, 1.0,
+        )
 
-                if mean_lap < self.min_contrast or local_std < (self.min_contrast * 0.7):
-                    continue
-
-                # 16-bin normalized gradient orientation descriptor (contrast-invariant)
-                p_mag = mag_full[iy - half_patch:iy + half_patch + 1, ix - half_patch:ix + half_patch + 1]
-                p_ori = ori_full[iy - half_patch:iy + half_patch + 1, ix - half_patch:ix + half_patch + 1]
-
-                hist, _ = np.histogram(p_ori, bins=16, range=(0.0, 360.0), weights=p_mag)
-                hist_norm = hist / (np.linalg.norm(hist) + 1e-7)
-
-                confidence = float(np.clip(
-                    (mean_lap / 20.0) * 0.5 + (local_std / iris_contrast_span) * 0.5,
-                    0.1, 1.0,
-                ))
-
-                feat = PentacamFeature(
-                    id=len(accepted_features),
-                    x=float(fx),
-                    y=float(fy),
-                    angle_deg=float(a_deg),
-                    radial_norm=float(r_norm),
-                    response=float(mean_lap),
-                    confidence=confidence,
-                    valid=True,
-                    descriptor=hist_norm.astype(np.float32),
-                )
-                accepted_features.append(feat)
+        accepted_features: List[PentacamFeature] = []
+        for j in np.nonzero(keep)[0]:
+            feat = PentacamFeature(
+                id=len(accepted_features),
+                x=float(sfx[j]),
+                y=float(sfy[j]),
+                angle_deg=float(angles_deg[sel_a[j]]),
+                radial_norm=float(rad_norms[sel_r[j]]),
+                response=float(mean_lap[j]),
+                confidence=float(confidence[j]),
+                valid=True,
+                descriptor=hist_norm[j].astype(np.float32),
+            )
+            accepted_features.append(feat)
 
         # Compute coverage metrics
         metrics = self._compute_coverage_metrics(accepted_features)
